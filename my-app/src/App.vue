@@ -3,11 +3,11 @@ import { RouterLink, RouterView } from 'vue-router'
 import { ref, onMounted } from 'vue'
   import { supabase } from './lib/supabaseClient'
 
-  const countries = ref([])
+  const userdata = ref([])
 
   async function getCountries() {
-    const { data } = await supabase.from('countries').select()
-    countries.value = data
+    const { data } = await supabase.from('userdata').select()
+    userdata.value = data
   }
 
   onMounted(() => {
@@ -16,7 +16,7 @@ import { ref, onMounted } from 'vue'
 </script>
 <template>
   <ul>
-    <li v-for="country in countries" :key="country.id">{{ country.name }}</li>
+    <li v-for="country in userdata" :key="country.uuid">{{ country.username }}</li>
   </ul>
   
   <RouterLink to="/">Home</RouterLink>
