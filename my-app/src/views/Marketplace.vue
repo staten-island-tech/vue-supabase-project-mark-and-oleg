@@ -5,6 +5,8 @@ import { ref } from 'vue'
 
 let username = ref()
 let password = ref()
+//const user = await supabase.auth.getUser()
+//console.log(user)
 function getPosition(e){
   e.preventDefault();
   let myuuid = uuidv4();
@@ -21,23 +23,17 @@ function getPosition(e){
         console.error('Error inserting UUID:', error);
     });
 }
-async function signUp(email, password) {
-    try {
-        const { user, session, error } = await supabase.auth.signUp({
-            email,
-            password,
-        });
-
-        if (error) {
-            throw error;
-        }
-
-        console.log('Sign-up successful:', user);
-    } catch (error) {
-        console.error('Sign-up error:', error.message);
+async function signInWithEmail() {
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: username.value,
+    password: password.value,
+    options: {
+      data: {
+        username: username.value
+      }
     }
+  })
 }
-
 </script>
 
 <template>
@@ -47,7 +43,7 @@ async function signUp(email, password) {
       <input v-model="username" required/>
       <label id="hi" for="hello">password</label>
       <input v-model="password" required/>
-      <input id="hi" type="submit" value="submit" @click="getPosition">
+      <input id="hi" type="submit" value="submit" @click.prevent="signInWithEmail">
     </form>
   </div>
 </template>
