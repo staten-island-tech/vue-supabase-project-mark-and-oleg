@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "@supabase/supabase-js": "^2.42.0"
+    "tsconfig": "^7.0.0",
+    "uuid": "^9.0.1"
   }
 }
