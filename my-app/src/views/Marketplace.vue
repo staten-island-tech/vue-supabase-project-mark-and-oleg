@@ -43,11 +43,12 @@ async function signUp(email, password) {
 <template>
   <div class="about">
     <form class="positionForm">
-      <label id="hi" for="hi">username</label>
-      <input v-model="username" required/>
-      <label id="hi" for="hello">password</label>
-      <input v-model="password" required/>
+      <label id="hi" for="hi">Username</label>
+      <input v-model="username" class="usernameInp" required/>
+      <label id="hi" for="hello">Password</label>
+      <input v-model="password" type="password" class="passInp" required/>
       <input id="hi" type="submit" value="submit" @click="getPosition">
+
     </form>
   </div>
 </template>
@@ -56,7 +57,18 @@ async function signUp(email, password) {
 .positionForm{
   display: flex;
   flex-direction: column;
-  width: 100px;
+  width: 20%;
   justify-content: center;
 }
+
+.usernameInp {
+  font-size: 2rem;
+}
+
+.passInp {
+  font-size: 2rem ;
+}
+
+
+
 </style>
