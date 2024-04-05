@@ -1,17 +1,10 @@
 <script setup lang="ts">
-import {v4 as uuidv4} from 'uuid';
+
 import { supabase } from '@/lib/supabaseClient.js'
 import { ref } from 'vue'
 
 let username = ref()
 let password = ref()
-
-function getPosition(e){
-  e.preventDefault();
-  let myuuid = uuidv4();
-  const now = new Date();
-  const poop = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()} EDT`
-}
 
 async function signInWithEmail() {
   const { data, error } = await supabase.auth.signInWithPassword({
