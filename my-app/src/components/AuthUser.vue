@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { supabase } from '@/lib/supabaseClient.js'
+import TheWelcome from '@/components/TheWelcome.vue'
 
 const loading = ref(false)
 const email = ref('')
@@ -10,16 +11,28 @@ function fart() {
   console.log(email.value)
 }
 async function handleLogin() {
-  const { data, error } = await supabase.auth.signUp({
-    email: email.value,
-    password: password.value,
-    options: {
-      data: {
-        username: username.value
-      }
-    },
-  })
+  try {
+    // Sign up the user
+    const userData = await supabase.auth.signUp({
+      email: email.value,
+      password: password.value,
+      options: {
+        data: {
+          username: username.value
+        }
+      },
+    });
+
+    await supabase
+      .from('userdata')
+      .insert({ uuid: userData.data.user.id, created_at: userData.data.user.created_at })
+    console.log('User signed up successfully:', userData.data.user.id);
+
+  } catch (error) {
+    console.error('Sign-up error:', error.message);
+  }
 }
+
 </script>
 
 <template>
@@ -28,7 +41,7 @@ async function handleLogin() {
       <h1 class="header">Supabase + Vue 3</h1>
       <p class="description">Sign in via magic link with your email below</p>
       <div>
-        <input class="inputField" required type="username" placeholder="Username" v-model="username" />
+
         <input class="inputField" required type="email" placeholder="Your email" v-model="email" />
         <input class="inputField" required type="password" placeholder="Create password" v-model="password" />
       </div>
@@ -42,4 +55,5 @@ async function handleLogin() {
       </div>
     </div>
   </form>
+  <TheWelcome/>
 </template>

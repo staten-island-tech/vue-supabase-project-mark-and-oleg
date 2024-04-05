@@ -5,24 +5,14 @@ import { ref } from 'vue'
 
 let username = ref()
 let password = ref()
-//const user = await supabase.auth.getUser()
-//console.log(user)
+
 function getPosition(e){
   e.preventDefault();
   let myuuid = uuidv4();
   const now = new Date();
   const poop = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()} EDT`
-  supabase
-    .from('userdata')
-    .insert([{ uuid: myuuid, created_at: poop, inventory: ['hi'], username: username.value, password: password.value }])
-    
-    .then(response => {
-        console.log('UUID inserted successfully:', response);
-    })
-    .catch(error => {
-        console.error('Error inserting UUID:', error);
-    });
 }
+
 async function signInWithEmail() {
   const { data, error } = await supabase.auth.signInWithPassword({
     email: username.value,
@@ -34,6 +24,14 @@ async function signInWithEmail() {
     }
   })
 }
+async function getUserData() {
+  const user = (await supabase.auth.getUser()).data.user;
+  console.log(user)
+}
+async function signOutCurrentUser() {
+  const { error } = await supabase.auth.signOut();
+
+}
 </script>
 
 <template>
@@ -44,6 +42,8 @@ async function signInWithEmail() {
       <label id="hi" for="hello">password</label>
       <input v-model="password" required/>
       <input id="hi" type="submit" value="submit" @click.prevent="signInWithEmail">
+      <input id="hi" type="submit" value="sign out" @click.prevent="signOutCurrentUser">
+      <input id="hi" type="submit" value="get user skibidi data" @click.prevent="getUserData">
     </form>
   </div>
 </template>

@@ -1,14 +1,16 @@
 <template>
   <div>
-
+    <button class="fart" @click.prevent="fanum">fart</button>
   </div>
 </template>
 
 <script setup lang="ts">
+import { supabase } from '@/lib/supabaseClient.js'
 const groups = [
     { items: ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'], probability: 0.8 },
     { items: ['Item 6', 'Item 7', 'Item 8'], probability: 0.2 }
 ]
+
 function pickItemWithProbability() {
     const randomNumber = Math.random();
 
@@ -22,14 +24,24 @@ function pickItemWithProbability() {
     }
     return null;
 }
+async function fanum() {
+  const userData = await supabase.auth.getUser()
+  console.log(userData)
+  const item = {skibidi: pickItemWithProbability()};
+  const oldSigmaData = await supabase.from('userdata').select().eq('uuid', userData.data.user.id)
+  let fartArr = oldSigmaData.data[0].inventory
+  fartArr.push(item)
+  console.log(fartArr)
+  const csx = oldSigmaData.data[0].inventory
 
-let arr = []
-for(let i = 1; i <= 100; i++){
-  const selectedItem = pickItemWithProbability();
-  arr.push(selectedItem)
-}
-arr = arr.sort()
-console.log(arr)
+
+  await supabase
+    .from('userdata')
+    .update({ inventory: fartArr})
+    .eq('uuid', userData.data.user.id)
+  }
+
+
 </script>
 
 <style scoped>
