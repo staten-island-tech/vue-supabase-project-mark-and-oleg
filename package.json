@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "pinia": "^2.1.7",
     "tsconfig": "^7.0.0",
     "uuid": "^9.0.1"
   }

@@ -32,7 +32,6 @@ async function fanum() {
   let fartArr = oldSigmaData.data[0].inventory
   fartArr.push(item)
   console.log(fartArr)
-  const csx = oldSigmaData.data[0].inventory
 
 
   await supabase

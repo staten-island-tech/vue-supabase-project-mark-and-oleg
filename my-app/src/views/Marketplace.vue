@@ -2,43 +2,31 @@
 
 import { supabase } from '@/lib/supabaseClient.js'
 import { ref } from 'vue'
+import { boxesList } from '@/stores/boxes.ts'
+async function fanum(x) {
+  const userData = await supabase.auth.getUser()
+  console.log(userData)
+  const oldSigmaData = await supabase.from('userdata').select().eq('uuid', userData.data.user.id)
+  let fartArr = oldSigmaData.data[0].inventory
+  fartArr.push(x)
+  console.log(fartArr)
 
-let username = ref()
-let password = ref()
 
-async function signInWithEmail() {
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email: username.value,
-    password: password.value,
-    options: {
-      data: {
-        username: username.value
-      }
-    }
-  })
-}
-async function getUserData() {
-  const user = (await supabase.auth.getUser()).data.user;
-  console.log(user)
-}
-async function signOutCurrentUser() {
-  const { error } = await supabase.auth.signOut();
+  await supabase
+    .from('userdata')
+    .update({ inventory: fartArr})
+    .eq('uuid', userData.data.user.id)
+  }
 
-}
 </script>
 
 <template>
-  <div class="about">
-    <form class="positionForm">
-      <label id="hi" for="hi">username</label>
-      <input v-model="username" required/>
-      <label id="hi" for="hello">password</label>
-      <input v-model="password" required/>
-      <input id="hi" type="submit" value="submit" @click.prevent="signInWithEmail">
-      <input id="hi" type="submit" value="sign out" @click.prevent="signOutCurrentUser">
-      <input id="hi" type="submit" value="get user skibidi data" @click.prevent="getUserData">
-    </form>
+  <div class="boxes" v-for="boxes in boxesList">
+    <h2>{{ boxes.item }}</h2>
+    <button @click="fanum(boxes)">buy box</button>
   </div>
+  <h1>USER MARKETPLACE</h1>
+  
 </template>
 
 <style scoped>

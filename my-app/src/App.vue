@@ -7,8 +7,11 @@ import { RouterLink, RouterView } from 'vue-router'
   <div class="wrapper">
     <button class="button-38"><RouterLink to="/">Home</RouterLink></button>
     
-    <button class="button-38"><RouterLink to="/market">Market</RouterLink>
- </button>
+    <button class="button-38"><RouterLink to="/market">Market</RouterLink></button>
+
+    <button class="button-38"><RouterLink to="/profile">Profile</RouterLink></button>
+
+    <button class="button-38"><RouterLink to="/signin">Sign In</RouterLink></button>
   </div>
   
   <RouterView />

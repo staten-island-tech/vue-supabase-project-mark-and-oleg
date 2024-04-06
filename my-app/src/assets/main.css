@@ -6,7 +6,8 @@ a,
   text-decoration: none;
   margin-right: 5%;
   margin-left: 5%;
-  color: blue;
+  color: rgb(255, 0, 217);
+
   transition: 0.4s;
   font-size: 2rem;
   font-weight: 500;
@@ -15,28 +16,27 @@ body{
     margin: 0 5% 0 5%;
 }
 
-
-/* CSS */
 .button-38 {
   background-color: #FFFFFF;
   border: 0;
   border-radius: .5rem;
   box-sizing: border-box;
-  color: #111827;
-  font-family: "Inter var",ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  color: rgb(255, 0, 217);
+
   font-size: .875rem;
-  font-weight: 600;
+  font-weight: 1000;
   line-height: 1.25rem;
   padding: .75rem 1rem;
   text-align: center;
   text-decoration: none #D1D5DB solid;
   text-decoration-thickness: auto;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+
   cursor: pointer;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
   margin-left: 3%;
+  transition: .3s;
 }
 
 .button-38:hover {
