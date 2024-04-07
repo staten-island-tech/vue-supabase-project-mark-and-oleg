@@ -1,8 +1,9 @@
 <script setup lang="ts">
 
 import { supabase } from '@/lib/supabaseClient.js'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { boxesList } from '@/stores/boxes.ts'
+let fartArr = []
 async function fanum(x) {
   const userData = await supabase.auth.getUser()
   console.log(userData)
@@ -10,14 +11,22 @@ async function fanum(x) {
   let fartArr = oldSigmaData.data[0].inventory
   fartArr.push(x)
   console.log(fartArr)
-
-
+  
   await supabase
     .from('userdata')
     .update({ inventory: fartArr})
     .eq('uuid', userData.data.user.id)
+}
+const countries = ref([])
+  async function getCountries() {
+    const { data } = await supabase.from('usermarket').select()
+    countries.value = data
+    console.log(countries.value)
   }
 
+  onMounted(() => {
+    getCountries()
+  })
 </script>
 
 <template>
@@ -26,7 +35,7 @@ async function fanum(x) {
     <button @click="fanum(boxes)">buy box</button>
   </div>
   <h1>USER MARKETPLACE</h1>
-  
+  <div class="usermarket" v-for="item in countries">{{ item }}</div>
 </template>
 
 <style scoped>

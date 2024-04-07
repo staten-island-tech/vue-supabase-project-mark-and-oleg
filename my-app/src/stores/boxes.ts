@@ -10,7 +10,7 @@ export const boxesList = ref([
             'regular cameraman',
             'regular big skibidi toilet',
             'regular goon toilet',
-            'regular sawblade toilet',
+            'regular sawblade skibidi toilet',
             'regular speakerman',
             'regular tv man',
         ],

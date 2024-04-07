@@ -5,7 +5,7 @@
         <button @click="sell(skib)">Sell</button>
     </div>
     <div v-if="showGui">
-        <h2>{{ skib }}</h2>
+        <h2>{{ inventory }}</h2>
         <button @click="closeGui">Close GUI</button>
     </div>
 </template>
@@ -23,10 +23,12 @@ interface InventoryItem {
 
 let userInv = ref<InventoryItem[]>([]);
 let showGui = ref(false);
-
+let userID = ref(null)
+let inventory = ref('')
 async function callUserData() {
     const userData = await supabase.auth.getUser();
     const oldSigmaData = await supabase.from('userdata').select().eq('uuid', userData.data.user.id);
+    userID = userData.data.user.id
     userInv.value = oldSigmaData.data[0].inventory;
 }
 
@@ -38,11 +40,18 @@ async function unbox(item: InventoryItem) {
         console.log(item)
     }
 }
-function sell(item: InventoryItem) {
+async function sell(item: InventoryItem) {
+    const updatedInventory = userInv.value.filter(invItem => invItem.id !== item.id);
+    console.log(updatedInventory)
+    await supabase
+      .from('userdata')
+      .update({ inventory: updatedInventory })
+      .eq('uuid', userID);
+
+    userInv.value = updatedInventory;
 
     showGui.value = true;
 }
-
 function closeGui() {
     showGui.value = false;
 }
