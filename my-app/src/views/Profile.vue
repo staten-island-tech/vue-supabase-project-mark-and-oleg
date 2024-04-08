@@ -35,7 +35,8 @@ async function callUserData() {
 async function unbox(item: InventoryItem) {
     if (item.itemType === 'crate') {
         const randomIndex = Math.floor(Math.random() * item.possibleLoot.length);
-        console.log(item.possibleLoot[randomIndex]);
+        const newItem = item.possibleLoot[randomIndex];
+        console.log(newItem);
     }else{
         console.log(item)
     }
