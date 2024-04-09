@@ -12,6 +12,8 @@ import { RouterLink, RouterView } from 'vue-router'
     <button class="button-38"><RouterLink to="/profile">Profile</RouterLink></button>
 
     <button class="button-38"><RouterLink to="/signin">Sign In</RouterLink></button>
+
+    <button class="button-38"><RouterLink to="/trade">Trade</RouterLink></button>
   </div>
   
   <RouterView />
