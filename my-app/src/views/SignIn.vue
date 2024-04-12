@@ -5,6 +5,19 @@ import { ref } from 'vue'
 let username = ref()
 let password = ref()
 
+
+create policy "Public profiles are viewable by everyone."
+  on profiles for select
+  using ( true );
+
+create policy "Users can insert their own profile."
+  on profiles for insert
+  with check ( (select auth.uid()) = id );
+
+create policy "Users can update own profile."
+  on profiles for update
+  using ( (select auth.uid()) = id );
+
 async function signInWithEmail() {
   const { data, error } = await supabase.auth.signInWithPassword({
     email: username.value,
@@ -23,6 +36,7 @@ async function getUserData() {
 }
 async function signOutCurrentUser() {
   await supabase.auth.signOut();
+  
 }
 </script>
 
