@@ -3,7 +3,7 @@
         <form>
 
         </form>
-        <button @click="sendFriendRequest('f54890d3-1f4e-4f25-830c-2482726117a2', 'ac6d80ec-1443-4923-a104-3c75ff6e1924')">skib</button>
+        <button @click="sendFriendRequest()">skib</button>
     </div>
 </template>
 
@@ -13,11 +13,11 @@ import { supabase } from '@/lib/supabaseClient.js'
 async function sendFriendRequest() {
     const userData = await supabase.auth.getUser();
     let senderId = userData.data.user.id
-    let currentFriends = await supabase.from('userdata').select().eq('uuid', sender_id);
-    console.log(currentFriends.data[0].friends)
+    let currentFriends = await supabase.from('userdata').select().eq('uuid', senderId);
+    console.log(currentFriends.data[0].friends, senderId)
     const { data, error } = await supabase
         .from('friendrequests')
-        .insert([{ senderId: senderId, receiverId: receiverId}]);
+        .insert([{ senderId: senderId, receiverId: 'ac6d80ec-1443-4923-a104-3c75ff6e1924'}]);
     if (error) {
         console.error('Error sending friend request:', error.message);
     }

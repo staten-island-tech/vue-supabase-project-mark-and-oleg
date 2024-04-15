@@ -5,7 +5,7 @@ import { ref } from 'vue'
 let username = ref()
 let password = ref()
 
-
+/* 
 create policy "Public profiles are viewable by everyone."
   on profiles for select
   using ( true );
@@ -16,7 +16,7 @@ create policy "Users can insert their own profile."
 
 create policy "Users can update own profile."
   on profiles for update
-  using ( (select auth.uid()) = id );
+  using ( (select auth.uid()) = id ); */
 
 async function signInWithEmail() {
   const { data, error } = await supabase.auth.signInWithPassword({
