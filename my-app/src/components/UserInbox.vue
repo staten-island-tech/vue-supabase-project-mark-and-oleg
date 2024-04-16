@@ -19,4 +19,4 @@ function openGui(){
     width: 5%;
     height: 100%;
 }
-</style>
+</style> 
