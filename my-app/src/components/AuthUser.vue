@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import { supabase } from '@/lib/supabaseClient.js'
 import TheWelcome from '@/components/TheWelcome.vue'

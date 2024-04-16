@@ -1,18 +1,20 @@
 <template>
     <div>
-        <form>
 
-        </form>
         <button @click="sendFriendRequest()">skib</button>
+        <button @click="acceptFriendRequest('ac6d80ec-1443-4923-a104-3c75ff6e1924', '01d82b5b-2bad-4737-86af-927bed3490db')">rizz</button>
+
     </div>
 </template>
 
 <script setup>
 import { supabase } from '@/lib/supabaseClient.js'
 
+
 async function sendFriendRequest() {
     const userData = await supabase.auth.getUser();
-    let senderId = userData.data.user.id
+    const userId = userData.data.user.id
+    let senderId = userId
     let currentFriends = await supabase.from('userdata').select().eq('uuid', senderId);
     console.log(currentFriends.data[0].friends, senderId)
     const { data, error } = await supabase
@@ -24,22 +26,21 @@ async function sendFriendRequest() {
 }
 
 
-async function acceptFriendRequest(requestId) {
+async function acceptFriendRequest(senderId, receiverId) {
     const { data, error } = await supabase
-        .from('friend_requests')
-        .update({ status: 'accepted' })
-        .eq('id', requestId);
+        .from('friendrequests')
+        .delete()
+        .eq('requestId', 'af053a91-6852-4f32-b9aa-628a512adf37')
+
     if (error) {
         console.error('Error accepting friend request:', error.message);
     }
+/* 
+        const { senderId, receiverId } = request;
+        await addFrziend(sender_id, receiver_id);
+        await addFriend(receiver_id, sender_id); */
 
-    const request = data[0];
-    if (request) {
-        const { sender_id, receiver_id } = request;
-        await addFriend(sender_id, receiver_id);
-        await addFriend(receiver_id, sender_id);
-    }
-}
+} 
 
 
 async function rejectFriendRequest(requestId) {

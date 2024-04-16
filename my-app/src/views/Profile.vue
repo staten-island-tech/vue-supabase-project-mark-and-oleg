@@ -2,12 +2,15 @@
     <div v-for="skib in userInv">
         <h1>{{ skib.item }}</h1>
         <button @click="unbox(skib)">Unbox</button>
-        <button @click="sell(skib)">Sell</button>
+        <button @click="openGui">Sell</button>
+        <div v-if="showGui">
+            <h2>{{ skib }}</h2>
+            <button @click="sell(skib)">Sell to Market</button>
+            <input placeholder="skibidi" v-model="price"/>
+            <button @click="closeGui">Close GUI</button>
+        </div>
     </div>
-    <div v-if="showGui">
-        <h2>{{ inventory }}</h2>
-        <button @click="closeGui">Close GUI</button>
-    </div>
+
 </template>
 
 <script setup lang="ts">
@@ -25,39 +28,56 @@ let userInv = ref<InventoryItem[]>([]);
 let showGui = ref(false);
 let userID = ref(null)
 let inventory = ref('')
+let price = ref()
 async function callUserData() {
     const userData = await supabase.auth.getUser();
     const oldSigmaData = await supabase.from('userdata').select().eq('uuid', userData.data.user.id);
     userID = userData.data.user.id
     userInv.value = oldSigmaData.data[0].inventory;
 }
-
+callUserData();
 async function unbox(item: InventoryItem) {
     if (item.itemType === 'crate') {
         const randomIndex = Math.floor(Math.random() * item.possibleLoot.length);
         const newItem = item.possibleLoot[randomIndex];
-        console.log(newItem);
+
+        const updatedInventory = userInv.value.filter(invItem => invItem !== item);
+        userInv.value = updatedInventory;
+        userInv.value.push(newItem)
+        await supabase
+          .from('userdata')
+          .update({ inventory: updatedInventory })
+          .eq('uuid', userID);
     }else{
         console.log(item)
     }
 }
 async function sell(item: InventoryItem) {
-    const updatedInventory = userInv.value.filter(invItem => invItem.id !== item.id);
-    console.log(updatedInventory)
+    const updatedInventory = userInv.value.filter(invItem => invItem !== item);
+    const specificItem = userInv.value.filter(invItem => invItem == item)
+    const userData = await supabase.auth.getUser()
+    console.log(userData.data.user.id)
+    console.log(updatedInventory, specificItem)
     await supabase
       .from('userdata')
       .update({ inventory: updatedInventory })
       .eq('uuid', userID);
 
+    const { error } = await supabase
+      .from('usermarket')
+      .insert({ item: item.item, itemType: item.itemType, sellPrice: price.value, soldBy: userData.data.user.email})
+
     userInv.value = updatedInventory;
 
-    showGui.value = true;
+    showGui.value = false;
 }
 function closeGui() {
     showGui.value = false;
 }
+function openGui() {
+    showGui.value = true
+}
 
-callUserData();
 </script>
 
 <style scoped>
