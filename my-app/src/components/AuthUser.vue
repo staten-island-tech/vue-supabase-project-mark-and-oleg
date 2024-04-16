@@ -9,6 +9,10 @@ const password = ref('')
 const username = ref('')
 
 async function handleLogin() {
+  const audio = new Audio("@/public/skibidi.mp3");
+
+  audio.play();
+
   try {
 
     const userData = await supabase.auth.signUp({
@@ -49,6 +53,7 @@ async function handleLogin() {
           class="button block"
           :value="loading ? 'Loading' : 'Create User'"
           :disabled="loading"
+          
         />
       </div>
     </div>
