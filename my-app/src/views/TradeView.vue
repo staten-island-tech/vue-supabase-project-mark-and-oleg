@@ -1,7 +1,6 @@
 <template>
     <div>
         <h1>Trade Skibidis Here!</h1>
-        <FriendRequests/>
     </div>
 </template>
 

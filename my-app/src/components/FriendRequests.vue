@@ -1,25 +1,29 @@
 <template>
-    <div>
 
-        <button @click="sendFriendRequest()">skib</button>
-        <button @click="acceptFriendRequest('ac6d80ec-1443-4923-a104-3c75ff6e1924', '01d82b5b-2bad-4737-86af-927bed3490db')">rizz</button>
+<!--         <button @click="sendFriendRequest()">skib</button> -->
+        <button @click="acceptFriendRequest(userId, '01d82b5b-2bad-4737-86af-927bed3490db')">fanum toilet</button>
 
-    </div>
 </template>
 
 <script setup>
 import { supabase } from '@/lib/supabaseClient.js'
+import { ref, onMounted } from 'vue'
 
+const userId = ref()
 
-async function sendFriendRequest() {
+async function rizztoilet(){
     const userData = await supabase.auth.getUser();
-    const userId = userData.data.user.id
-    let senderId = userId
+    userId.value = userData.data.user.id
+}
+onMounted(()=>{
+    rizztoilet()
+})
+async function sendFriendRequest(receiverId) {
     let currentFriends = await supabase.from('userdata').select().eq('uuid', senderId);
     console.log(currentFriends.data[0].friends, senderId)
     const { data, error } = await supabase
         .from('friendrequests')
-        .insert([{ senderId: senderId, receiverId: 'ac6d80ec-1443-4923-a104-3c75ff6e1924'}]);
+        .insert([{ senderId: senderId, receiverId: receiverId}]);
     if (error) {
         console.error('Error sending friend request:', error.message);
     }
@@ -30,15 +34,14 @@ async function acceptFriendRequest(senderId, receiverId) {
     const { data, error } = await supabase
         .from('friendrequests')
         .delete()
-        .eq('requestId', 'af053a91-6852-4f32-b9aa-628a512adf37')
+        .eq('requestId', 'd7645c5c-c3e4-4583-a6d2-8f9c74ad3690')
 
     if (error) {
         console.error('Error accepting friend request:', error.message);
     }
-/* 
-        const { senderId, receiverId } = request;
-        await addFrziend(sender_id, receiver_id);
-        await addFriend(receiver_id, sender_id); */
+
+    await addFriend(senderId, receiverId);
+    await addFriend(receiverId, senderId); 
 
 } 
 
@@ -53,13 +56,11 @@ async function rejectFriendRequest(requestId) {
     }
 }
 
-async function addFriend(userId, friendId) {
-    const { data, error } = await supabase
+async function addFriend(receiverId, senderId) {
+    await supabase
         .from('userdata')
-        .insert([{ friends: friendId }]);
-    if (error) {
-        console.error('Error adding friend:', error.message);
-    }
+        .update([{ friends: senderId }])
+        .eq('uuid', receiverId )
 }
 
 

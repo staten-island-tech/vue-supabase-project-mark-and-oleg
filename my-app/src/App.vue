@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import { UserInbox } from '@/components/UserInbox.vue'
+import UserInbox from '@/components/UserInbox.vue'
 </script>
 
 <template>
@@ -15,6 +15,8 @@ import { UserInbox } from '@/components/UserInbox.vue'
     <button class="button-38"><RouterLink to="/signin">Sign In</RouterLink></button>
 
     <button class="button-38"><RouterLink to="/trade">Trade</RouterLink></button>
+
+    <button class="button-38"><UserInbox/></button>
   </div>
   
   <RouterView />
