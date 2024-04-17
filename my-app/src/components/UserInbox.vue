@@ -23,7 +23,7 @@ async function callFriendRequests(){
         .from('userdata')
         .select('username')
         .eq('uuid', data[0].senderId)
-    friendReqs.value = data
+    friendReqs.value = fanumrizz.data[0].username
 }
 onMounted(() => {
     callFriendRequests()
