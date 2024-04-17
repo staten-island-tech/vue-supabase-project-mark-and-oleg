@@ -31,10 +31,11 @@ async function sendFriendRequest(receiverId) {
 
 
 async function acceptFriendRequest(senderId, receiverId) {
+    let requestId = await supabase.from('friendrequests').select().eq('senderId', senderId).eq('receiverId', receiverId)
     const { data, error } = await supabase
         .from('friendrequests')
         .delete()
-        .eq('requestId', 'd7645c5c-c3e4-4583-a6d2-8f9c74ad3690')
+        .eq('requestId', '41718784-34ea-4cda-9ec2-9ffc1380c5ee')
 
     if (error) {
         console.error('Error accepting friend request:', error.message);

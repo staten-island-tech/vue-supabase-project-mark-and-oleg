@@ -17,10 +17,12 @@ async function callFriendRequests(){
     
     const { data } = await supabase
         .from('friendrequests')
-        .select('receiverId')
+        .select('senderId')
         .eq('receiverId', userData.data.user.id)
-
-    console.log(data)
+    const fanumrizz = await supabase
+        .from('userdata')
+        .select('username')
+        .eq('uuid', data[0].senderId)
     friendReqs.value = data
 }
 onMounted(() => {
@@ -39,7 +41,6 @@ function openGui(){
 <style scoped>
 .sploingus{
     transition: .3s all;
-
     padding: 20px 20px 20px 20px;
     width: 5%;
     height: 100%;
