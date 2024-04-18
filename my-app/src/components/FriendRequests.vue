@@ -1,6 +1,6 @@
 <template>
-
-        <button @click="sendFriendRequest()">skib</button>
+<!-- 
+        <button @click="sendFriendRequest()">skib</button> -->
         <button @click="acceptFriendRequest(userId, '01d82b5b-2bad-4737-86af-927bed3490db')">fanum toilet</button>
 
 </template>
@@ -41,8 +41,8 @@ async function acceptFriendRequest(senderId, receiverId) {
         console.error('Error accepting friend request:', error.message);
     }
 
-    await addFriend(senderId, requestId);
-    await addFriend(requestId, senderId); 
+    await addFriend(senderId, receiverId);
+    await addFriend(receiverId, senderId); 
 
 } 
 
