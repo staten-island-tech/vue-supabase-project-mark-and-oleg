@@ -8,23 +8,14 @@ const email = ref('')
 const password = ref('')
 const username = ref('')
 
-// function PlaySound(melody) {
-//         alert("On Press of "+melody);
-//         var path = "path\\to\\melody\\"
-//         var snd = new Audio(path + melody + ".mp3");
-//         snd.play();
-//     }
 
-// function PlaySound() {
-//   const bflat = new Audio("@/public/skibidi.mp3");
-//   bflat.src = "bflat.mp3";
-//   document.getElementById(bflat);
-//   bflat.play();
-// }
+
 
 async function handleLogin() {
   
-  PlaySound();
+  var audio = new Audio("skibidi2.mp3");
+  audio.play();
+  
   try {
 
     const userData = await supabase.auth.signUp({
@@ -50,7 +41,6 @@ async function handleLogin() {
 </script>
 
 <template>
-  <audio id="bflat"> </audio>
   <form class="row flex-center flex" @submit.prevent="handleLogin">
     <div class="col-6 form-widget">
       <h1 class="header">Supabase + Vue 3</h1>
