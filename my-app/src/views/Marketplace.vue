@@ -4,6 +4,11 @@ import { supabase } from '@/lib/supabaseClient.js'
 import { ref, onMounted } from 'vue'
 import { boxesList } from '@/stores/boxes.ts'
 let fartArr = []
+
+function felch(x){
+  setTimeout(()=> fanum(x), 2500)
+}
+
 async function fanum(x) {
   const userData = await supabase.auth.getUser()
   console.log(userData)
@@ -32,7 +37,7 @@ const countries = ref([])
 <template>
   <div class="boxes" v-for="boxes in boxesList">
     <h2>{{ boxes.item }}</h2>
-    <button @click="fanum(boxes)">buy box</button>
+    <button @click="felch(boxes)">buy box</button>
   </div>
   <h1>USER MARKETPLACE</h1>
   <div class="usermarket" v-for="item in countries">{{ item }}</div>
