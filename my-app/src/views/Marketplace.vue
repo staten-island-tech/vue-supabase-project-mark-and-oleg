@@ -17,6 +17,7 @@ async function fanum(x) {
     .update({ inventory: fartArr})
     .eq('uuid', userData.data.user.id)
 }
+
 const countries = ref([])
   async function getCountries() {
     const { data } = await supabase.from('usermarket').select()

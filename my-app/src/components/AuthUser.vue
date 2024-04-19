@@ -12,10 +12,12 @@ const username = ref('')
 
 
 async function handleLogin() {
-  
+
   var audio = new Audio("skibidi2.mp3");
   audio.play();
-  
+  setTimeout(()=>{
+    audio.pause()
+  }, 2500)
   try {
 
     const userData = await supabase.auth.signUp({

@@ -31,7 +31,7 @@ async function signInWithEmail() {
 }
 let list = []
 async function getUserData() {
-  const user = (await supabase.auth.getUser()).data.user;
+  const user = (await supabase.auth.getUser()).data.user.id;
   console.log(user)
 }
 async function signOutCurrentUser() {
