@@ -1,9 +1,19 @@
 <script setup lang="ts">
+import * as THREE from 'three';
+
 
 import { supabase } from '@/lib/supabaseClient.js'
 import { ref, onMounted } from 'vue'
 import { boxesList } from '@/stores/boxes.ts'
 let fartArr = []
+
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize( window.innerWidth, window.innerHeight );
+document.body.appendChild( renderer.domElement );
 
 function felch(x){
   setTimeout(()=> fanum(x), 2500)

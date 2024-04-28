@@ -1,7 +1,11 @@
 {
   "dependencies": {
     "pinia": "^2.1.7",
+    "three": "^0.164.1",
     "tsconfig": "^7.0.0",
     "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "vite": "^5.2.10"
   }
 }
