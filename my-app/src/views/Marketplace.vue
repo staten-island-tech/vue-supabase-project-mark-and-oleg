@@ -1,7 +1,6 @@
 <script setup lang="ts">
+
 import * as THREE from 'three';
-
-
 import { supabase } from '@/lib/supabaseClient.js'
 import { ref, onMounted } from 'vue'
 import { boxesList } from '@/stores/boxes.ts'
@@ -32,16 +31,7 @@ async function fanum(x) {
     .update({ inventory: fartArr})
     .eq('uuid', userData.data.user.id)
 }
-const countries = ref([])
-  async function getCountries() {
-    const { data } = await supabase.from('usermarket').select()
-    countries.value = data
-    console.log(countries.value)
-  }
 
-  onMounted(() => {
-    getCountries()
-  })
 </script>
 
 <template>
@@ -50,7 +40,6 @@ const countries = ref([])
     <button @click="felch(boxes)">buy box</button>
   </div>
   <h1>USER MARKETPLACE</h1>
-  <div class="usermarket" v-for="item in countries">{{ item }}</div>
 </template>
 
 <style scoped>
