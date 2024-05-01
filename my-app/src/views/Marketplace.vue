@@ -77,6 +77,13 @@ async function fanum(x) {
     .eq('uuid', userData.data.user.id)
 }
 
+const countries = ref([])
+  async function getCountries() {
+    const { data } = await supabase.from('usermarket').select()
+    countries.value = data
+    console.log(countries.value)
+  }
+
 </script>
 
 <template>
