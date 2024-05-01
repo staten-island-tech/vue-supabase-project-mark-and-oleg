@@ -1,9 +1,23 @@
 <script setup lang="ts">
 
+import * as THREE from 'three';
 import { supabase } from '@/lib/supabaseClient.js'
 import { ref, onMounted } from 'vue'
 import { boxesList } from '@/stores/boxes.ts'
 let fartArr = []
+
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize( window.innerWidth, window.innerHeight );
+document.body.appendChild( renderer.domElement );
+
+function felch(x){
+  setTimeout(()=> fanum(x), 2500)
+}
+
 async function fanum(x) {
   const userData = await supabase.auth.getUser()
   console.log(userData)
@@ -25,18 +39,14 @@ const countries = ref([])
     console.log(countries.value)
   }
 
-  onMounted(() => {
-    getCountries()
-  })
 </script>
 
 <template>
   <div class="boxes" v-for="boxes in boxesList">
     <h2>{{ boxes.item }}</h2>
-    <button @click="fanum(boxes)">buy box</button>
+    <button @click="felch(boxes)">buy box</button>
   </div>
   <h1>USER MARKETPLACE</h1>
-  <div class="usermarket" v-for="item in countries">{{ item }}</div>
 </template>
 
 <style scoped>
