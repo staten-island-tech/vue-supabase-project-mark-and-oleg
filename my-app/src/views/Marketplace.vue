@@ -38,7 +38,9 @@ const countries = ref([])
     countries.value = data
     console.log(countries.value)
   }
-
+onMounted(()=>{
+  getCountries()
+})
 </script>
 
 <template>
@@ -47,6 +49,7 @@ const countries = ref([])
     <button @click="felch(boxes)">buy box</button>
   </div>
   <h1>USER MARKETPLACE</h1>
+  <div class="usermarket" v-for="item in countries">{{ item }}</div>
 </template>
 
 <style scoped>
