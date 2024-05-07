@@ -1,10 +1,37 @@
-<script setup lang="ts">
+<script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import UserInbox from '@/components/UserInbox.vue'
+import { supabase } from '@/lib/supabaseClient.js'
+import { ref, onMounted } from 'vue'
+
+
+
+const sigma = ref(false)
+
+async function unc(){
+    const { data } = await supabase.auth.getUser()
+    if(data){
+        return true
+    }
+
+
+}
+
+onMounted(()=>{
+    unc()
+})
+
+
+
+
 </script>
 
 <template>
   
+  <div class="alert" v-if="sigma = true">
+      <h2>Hello, sigma</h2>
+  </div>
+
   <div class="wrapper">
     <button class="button-38"><RouterLink to="/">Home</RouterLink></button>
     
