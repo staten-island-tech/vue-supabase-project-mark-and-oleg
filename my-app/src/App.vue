@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import UserInbox from '@/components/UserInbox.vue'
 import { supabase } from '@/lib/supabaseClient.js'
@@ -6,15 +6,14 @@ import { ref, onMounted } from 'vue'
 
 
 
-const sigma = ref(false)
+let sigma = ref(false)
 
 async function unc(){
-    const { data } = await supabase.auth.getUser()
-    if(data){
-        return true
+    const rizzler = await supabase.auth.getUser()
+    console.log(rizzler.error)
+    if(rizzler.error === null){
+        sigma.value = true
     }
-
-
 }
 
 onMounted(()=>{
@@ -23,15 +22,12 @@ onMounted(()=>{
 
 
 
-
 </script>
 
 <template>
-  
-  <div class="alert" v-if="sigma = true">
+  <div class="alert" v-if="sigma">
       <h2>Hello, sigma</h2>
   </div>
-
   <div class="wrapper">
     <button class="button-38"><RouterLink to="/">Home</RouterLink></button>
     
