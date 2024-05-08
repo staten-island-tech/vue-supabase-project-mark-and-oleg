@@ -6,11 +6,12 @@ import { ref, onMounted } from 'vue'
 
 
 
-let sigma = ref(false)
 
+let sigma = ref(false)
+let rizzler
 async function unc(){
-    const rizzler = await supabase.auth.getUser()
-    console.log(rizzler.error)
+  rizzler = await supabase.auth.getUser()
+    console.log(rizzler)
     if(rizzler.error === null){
         sigma.value = true
     }
@@ -21,12 +22,11 @@ onMounted(()=>{
 })
 
 
-
 </script>
 
 <template>
   <div class="alert" v-if="sigma">
-      <h2>Hello, sigma</h2>
+      <h2>Hello, {{ rizzler.data.user.user_metadata.alias }}</h2>
   </div>
   <div class="wrapper">
     <button class="button-38"><RouterLink to="/">Home</RouterLink></button>
