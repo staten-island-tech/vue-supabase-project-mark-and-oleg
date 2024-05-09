@@ -10,25 +10,27 @@ let sigma = ref(false)
 
 async function unc(){
     const rizzler = await supabase.auth.getUser()
-    console.log(rizzler.error)
     if(rizzler.error === null){
         sigma.value = true
     }
+    location.reload();
 }
 
 onMounted(()=>{
     unc()
 })
-
-
-
 </script>
 
 <template>
   <div class="alert" v-if="sigma">
       <h2>Hello, sigma</h2>
   </div>
-  <div class="wrapper">
+  <div v-if="!sigma">
+    <button class="button-38"><RouterLink to="/">Home</RouterLink></button>
+
+    <button class="button-38"><RouterLink to="/signin">Sign In</RouterLink></button>
+  </div>
+  <div class="wrapper" v-if="sigma">
     <button class="button-38"><RouterLink to="/">Home</RouterLink></button>
     
     <button class="button-38"><RouterLink to="/market">Market</RouterLink></button>
