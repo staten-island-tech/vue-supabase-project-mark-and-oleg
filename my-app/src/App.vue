@@ -15,6 +15,7 @@ async function unc(){
     if(rizzler.error === null){
         sigma.value = true
     }
+    location.reload();
 }
 
 onMounted(()=>{
@@ -28,7 +29,12 @@ onMounted(()=>{
   <div class="alert" v-if="sigma">
       <h2>Hello, {{ rizzler.data.user.user_metadata.alias }}</h2>
   </div>
-  <div class="wrapper">
+  <div v-if="!sigma">
+    <button class="button-38"><RouterLink to="/">Home</RouterLink></button>
+
+    <button class="button-38"><RouterLink to="/signin">Sign In</RouterLink></button>
+  </div>
+  <div class="wrapper" v-if="sigma">
     <button class="button-38"><RouterLink to="/">Home</RouterLink></button>
     
     <button class="button-38"><RouterLink to="/market">Market</RouterLink></button>

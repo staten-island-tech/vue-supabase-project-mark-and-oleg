@@ -13,7 +13,7 @@ const username = ref('')
 
 async function handleLogin() {
 
-  var audio = new Audio("skibidi2.mp3");
+  let audio = new Audio("skibidi2.mp3");
   audio.play();
   setTimeout(()=>{
     audio.pause()

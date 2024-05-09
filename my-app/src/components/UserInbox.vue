@@ -31,7 +31,7 @@ onMounted(() => {
 const GUI = ref(false)
 function openGui(){
 
-        callFriendRequests()
+    callFriendRequests()
 
     GUI.value =! GUI.value
     console.log(GUI.value)
