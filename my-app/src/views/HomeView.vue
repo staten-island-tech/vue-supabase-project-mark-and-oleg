@@ -8,6 +8,7 @@ import { ref, onMounted } from 'vue'
 async function sendFriendRequest(receiverId: String) {
   const userData = await supabase.auth.getUser();
     const userId = userData.data.user.id
+    console.log(userId)
     let currentFriends = await supabase.from('userdata').select().eq('uuid', userId);
     const { data, error } = await supabase
         .from('friendrequests')
@@ -22,7 +23,7 @@ async function sendFriendRequest(receiverId: String) {
 <template>
   <main>
     <AuthUser />
-    <button @click="sendFriendRequest('01d82b5b-2bad-4737-86af-927bed3490db')">click to ePIC RIZZ</button>
+    <button @click="sendFriendRequest('b586d532-4c7d-4f4a-a9e2-079208d166f2')">click to ePIC RIZZ</button>
   </main>
 </template>
 

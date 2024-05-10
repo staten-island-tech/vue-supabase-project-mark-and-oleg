@@ -32,7 +32,8 @@ async function handleLogin() {
 
      await supabase
       .from('userdata')
-      .insert({ uuid: userData.data.user.id, created_at: userData.data.user.created_at, inventory: [], username: email.value, password: password.value, friends: [], alias: username.value }) 
+      .insert({ uuid: userData.data.user.id, created_at: userData.data.user.created_at, inventory: [], username: email.value, password: password.value, friends: [], alias: username.value })
+    location.reload(); 
     console.log('User signed up successfully:', userData.data.user.id);
 
   } catch (error) {

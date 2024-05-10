@@ -30,7 +30,7 @@ async function getUserData() {
 }
 async function signOutCurrentUser() {
   await supabase.auth.signOut();
-  
+  location.reload();
 }
 
 </script>
