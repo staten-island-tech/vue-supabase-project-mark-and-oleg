@@ -1,110 +1,72 @@
-<script setup lang="ts">
+<template>
+  <div>
+    <div class="card" v-for="box in boxesList" :key="box.id">
+      <h2>{{ box.item }}</h2>
+      <ModelBox :box="box" />
+      <div class="model-container">
+        
+      </div>
+      <button @click="buyBox(box)">Buy Box</button>
+    </div>
+    <h1>USER MARKETPLACE</h1>
+    <div class="usermarket" v-for="item in countries" :key="item.id">{{ item }}</div>
+  </div>
+</template>
 
-import * as THREE from 'three';
+<script setup lang="ts">
 import { supabase } from '@/lib/supabaseClient.js'
 import { ref, onMounted } from 'vue'
 import { boxesList } from '@/stores/boxes.ts'
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import ModelBox from "@/components/ModelBox.vue"
 
+const countries = ref([]);
 
-
-
-
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-camera.position.set(-30, 0, 30);
-
-
-const renderer = new THREE.WebGLRenderer({ alpha: true });
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
-
-const controls = new OrbitControls(camera, renderer.domElement);
-
-controls.enableDamping = true;
-controls.update();
-
-
-
-
-const light = new THREE.AmbientLight(0x404040, 100);
-scene.add(light);
-
-const loader = new GLTFLoader();
-
-let model;
-
-loader.load(
-    './Skibi.glb',
-    function (gltf) {
-        model = gltf.scene;
-        const bbox = new THREE.Box3().setFromObject(model);
-        const center = bbox.getCenter(new THREE.Vector3());
-        model.position.sub(center);
-        scene.add(model);
-    },
-    function (xhr) {
-        console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-    },
-    function (error) {
-        console.error(error);
-    }
-);
-
-function animate() {
-    requestAnimationFrame(animate);
-    controls.update();
-    renderer.render(scene, camera);
+async function getCountries() {
+  const { data } = await supabase.from('usermarket').select();
+  countries.value = data;
 }
 
-animate();
+onMounted(() => {
+  getCountries();
+});
 
-
-function felch(x){
-  setTimeout(()=> fanum(x), 2500)
+async function buyBox(box) {
+  const userData = await supabase.auth.getUser();
+  const oldSigmaData = await supabase.from('userdata').select().eq('uuid', userData.data.user.id);
+  let inventory = oldSigmaData.data[0].inventory;
+  inventory.push(box);
+  await supabase.from('userdata').update({ inventory }).eq('uuid', userData.data.user.id);
 }
-
-async function fanum(x) {
-  const userData = await supabase.auth.getUser()
-  console.log(userData)
-  const oldSigmaData = await supabase.from('userdata').select().eq('uuid', userData.data.user.id)
-  let fartArr = oldSigmaData.data[0].inventory
-  fartArr.push(x)
-  console.log(fartArr)
-  
-  await supabase
-    .from('userdata')
-    .update({ inventory: fartArr})
-    .eq('uuid', userData.data.user.id)
-}
-
-const countries = ref([])
-  async function getCountries() {
-    const { data } = await supabase.from('usermarket').select()
-    countries.value = data
-    console.log(countries.value)
-  }
-onMounted(()=>{
-  getCountries()
-})
 </script>
 
-<template>
-  <div class="boxes" v-for="boxes in boxesList">
-    <h2>{{ boxes.item }}</h2>
-
-    <button @click="felch(boxes)">buy box</button>
-  </div>
-  <h1>USER MARKETPLACE</h1>
-  <div class="usermarket" v-for="item in countries">{{ item }}</div>
-</template>
-
 <style scoped>
-.positionForm{
+.card {
   display: flex;
   flex-direction: column;
-  width: 100px;
-  justify-content: center;
+  align-items: center;
+  width: 40%;
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.model-container {
+  width: 100%;
+  height: 200px; /* Adjust as needed */
+}
+
+button {
+  margin-top: 10px;
+  cursor: pointer;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #0056b3;
 }
 </style>

@@ -15,7 +15,7 @@ async function unc(){
     if(rizzler.error === null){
         sigma.value = true
     }
-
+    
 }
 
 onMounted(()=>{
