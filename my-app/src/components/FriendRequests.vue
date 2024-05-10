@@ -1,7 +1,7 @@
 <template>
 <!-- 
         <button @click="sendFriendRequest()">skib</button> -->
-        <button @click="acceptFriendRequest(userId, '01d82b5b-2bad-4737-86af-927bed3490db')">fanum toilet</button>
+        <button @click="acceptFriendRequest(userId, 'b586d532-4c7d-4f4a-a9e2-079208d166f2')">fanum toilet</button>
 
 </template>
 
@@ -20,7 +20,7 @@ onMounted(()=>{
 })
 async function sendFriendRequest(receiverId, senderId) {
     let currentFriends = await supabase.from('userdata').select().eq('uuid', senderId);
-    console.log(currentFriends.data[0].friends, senderId)
+    console.log(userId)
     const { data, error } = await supabase
         .from('friendrequests')
         .insert([{ senderId: senderId, receiverId: receiverId}]);
