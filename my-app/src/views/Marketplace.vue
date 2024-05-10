@@ -1,71 +1,72 @@
+<template>
+  <div>
+    <div class="card" v-for="box in boxesList" :key="box.id">
+      <h2>{{ box.item }}</h2>
+      <ModelBox :box="box" />
+      <div class="model-container">
+        
+      </div>
+      <button @click="buyBox(box)">Buy Box</button>
+    </div>
+    <h1>USER MARKETPLACE</h1>
+    <div class="usermarket" v-for="item in countries" :key="item.id">{{ item }}</div>
+  </div>
+</template>
+
 <script setup lang="ts">
-
-
 import { supabase } from '@/lib/supabaseClient.js'
 import { ref, onMounted } from 'vue'
 import { boxesList } from '@/stores/boxes.ts'
 import ModelBox from "@/components/ModelBox.vue"
 
+const countries = ref([]);
 
-
-
-
-
-
-function felch(x){
-  setTimeout(()=> fanum(x), 2500)
+async function getCountries() {
+  const { data } = await supabase.from('usermarket').select();
+  countries.value = data;
 }
 
-async function fanum(x) {
-  const userData = await supabase.auth.getUser()
-  console.log(userData)
-  const oldSigmaData = await supabase.from('userdata').select().eq('uuid', userData.data.user.id)
-  let fartArr = oldSigmaData.data[0].inventory
-  fartArr.push(x)
-  console.log(fartArr)
-  
-  await supabase
-    .from('userdata')
-    .update({ inventory: fartArr})
-    .eq('uuid', userData.data.user.id)
-}
+onMounted(() => {
+  getCountries();
+});
 
-const countries = ref([])
-  async function getCountries() {
-    const { data } = await supabase.from('usermarket').select()
-    countries.value = data
-    console.log(countries.value)
-  }
-onMounted(()=>{
-  getCountries()
-})
+async function buyBox(box) {
+  const userData = await supabase.auth.getUser();
+  const oldSigmaData = await supabase.from('userdata').select().eq('uuid', userData.data.user.id);
+  let inventory = oldSigmaData.data[0].inventory;
+  inventory.push(box);
+  await supabase.from('userdata').update({ inventory }).eq('uuid', userData.data.user.id);
+}
 </script>
 
-<template>
-  <div class="boxes" v-for="boxes in boxesList">
-    <h2>{{ boxes.item }}</h2>
-    <ModelBox/> 
-    <button @click="felch(boxes)">buy box</button>
-  </div>
-  <h1>USER MARKETPLACE</h1>
-  <div class="usermarket" v-for="item in countries">{{ item }}</div>
-  
-</template>
-
 <style scoped>
-.positionForm{
+.card {
   display: flex;
   flex-direction: column;
-  width: 100px;
-  justify-content: center;
+  align-items: center;
+  width: 40%;
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
-.boxes {
-  display: flex;
+.model-container {
   width: 100%;
-  height: 100%;
-  padding: 10px;
-  margin: 2% 2% 2% 2%;
+  height: 200px; /* Adjust as needed */
+}
 
+button {
+  margin-top: 10px;
+  cursor: pointer;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #0056b3;
 }
 </style>
