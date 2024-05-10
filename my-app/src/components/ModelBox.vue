@@ -11,8 +11,8 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.set(-30, 0, 30);
+const camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 0.1, 1000);
+camera.position.set(-15, 10, 30);
 const container = ref(null);
 let renderer = null;
 
@@ -23,8 +23,10 @@ const initThree = () => {
         container.value.appendChild(renderer.domElement);
     }
 
-    // Initialize scene, camera, etc.
+
     const controls = new OrbitControls(camera, renderer.domElement);
+    controls.autoRotate = true;
+    controls.enableZoom = false;
     controls.enableDamping = true;
     controls.update();
 
@@ -66,9 +68,8 @@ const destroyThree = () => {
         if (renderer.domElement.parentNode) {
             renderer.domElement.parentNode.removeChild(renderer.domElement);
         }
-        renderer.dispose(); // Dispose renderer
-        renderer = null; // Reset renderer variable
-        // Dispose or clean up other resources
+        renderer.dispose(); 
+        renderer = null; 
     }
 };
 
