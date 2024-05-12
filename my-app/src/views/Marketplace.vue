@@ -69,4 +69,14 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+.fortnite{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.usermarket{
+  display: flex;
+  flex-direction: column;
+  
+}
 </style>

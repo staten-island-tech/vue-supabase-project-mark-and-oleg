@@ -13,11 +13,14 @@ const username = ref('')
 
 async function handleLogin() {
 
+<<<<<<< Updated upstream
   let audio = new Audio("skibidi2.mp3");
   audio.play();
   setTimeout(()=>{
     audio.pause()
   }, 2500)
+=======
+>>>>>>> Stashed changes
   try {
 
     const userData = await supabase.auth.signUp({
