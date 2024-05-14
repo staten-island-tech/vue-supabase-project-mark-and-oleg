@@ -1,16 +1,16 @@
 <template>
-  <div>
+  <div class="skibidi">
     <div class="card" v-for="box in boxesList" :key="box.id">
       <h2>{{ box.item }}</h2>
-      <ModelBox :box="box" />
+      <ModelBox :box="box" id="box" />
       <div class="model-container">
         
       </div>
       <button @click="buyBox(box)">Buy Box</button>
     </div>
-    <h1>USER MARKETPLACE</h1>
-    <div class="usermarket" v-for="item in countries" :key="item.id">{{ item }}</div>
   </div>
+  <h1>USER MARKETPLACE</h1>
+    <div class="usermarket" v-for="item in countries" :key="item.id">{{ item }}</div>
 </template>
 
 <script setup lang="ts">
@@ -44,13 +44,22 @@ async function buyBox(box) {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 40%;
+  width: 22%;
+  height: 1100px;
   padding: 10px;
   margin: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  align-items: center;
+  justify-content: space-around;
 }
-
+.skibidi{
+  display: flex;
+  flex-wrap: wrap;
+}
+#box{
+  height: 100px;
+}
 .model-container {
   width: 100%;
   height: 200px; /* Adjust as needed */

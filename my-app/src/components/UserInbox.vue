@@ -14,16 +14,21 @@ import FriendRequests from '@/components/FriendRequests.vue'
 const friendReqs = ref()
 async function callFriendRequests(){
     const userData = await supabase.auth.getUser()
-    
+    let sibidi = ref([])
     const { data } = await supabase
         .from('friendrequests')
         .select('senderId')
         .eq('receiverId', userData.data.user.id)
-    const fanumrizz = await supabase
-        .from('userdata')
-        .select('username')
-        .eq('uuid', data[0].senderId)
-    friendReqs.value = fanumrizz.data[0].username
+        console.log(data.length - 1)
+    for(let i=0; i < data.length - 1, i++;){
+        let value = await supabase
+            .from('userdata')
+            .select('username')
+            .eq('uuid', data[i].senderId)
+        console.log(value)
+    }
+    
+    friendReqs.value = sibidi.value
 }
 onMounted(() => {
     callFriendRequests()
