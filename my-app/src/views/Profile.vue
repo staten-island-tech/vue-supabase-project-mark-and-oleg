@@ -1,15 +1,22 @@
 <template>
-    <div v-for="skib in userInv">
-        <h1>{{ skib.item }}</h1>
-        <button @click="unbox(skib)">Unbox</button>
-        <button @click="openGui">Sell</button>
-        <div v-if="showGui">
-            <h2>{{ skib }}</h2>
-            <button @click="sell(skib)">Sell to Market</button>
-            <input placeholder="skibidi" v-model="price"/>
-            <button @click="closeGui">Close GUI</button>
+    <div class="fortnite">
+        <div v-for="skib in userInv">
+            <div class="card">
+                <h1>{{ skib.item }}</h1>
+                <div class="buttons">
+                    <button @click="unbox(skib)">Unbox</button>
+                    <button @click="openGui">Sell</button>
+                </div>
+                <div v-if="showGui">
+                    <h2>{{ skib }}</h2>
+                    <button @click="sell(skib)">Sell to Market</button>
+                    <input placeholder="skibidi" v-model="price"/>
+                    <button @click="closeGui">Close GUI</button>
+                </div>
+            </div>
         </div>
     </div>
+
 
 </template>
 
@@ -52,6 +59,7 @@ async function unbox(item: InventoryItem) {
         console.log(item)
     }
 }
+
 async function sell(item: InventoryItem) {
     const updatedInventory = userInv.value.filter(invItem => invItem !== item);
     const specificItem = userInv.value.filter(invItem => invItem == item)
@@ -81,5 +89,22 @@ function openGui() {
 </script>
 
 <style scoped>
+.fortnite{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.card {
+    display: flex;
+    flex-direction: column;
+    border: 4px solid black;
+    width: 250px;
+    align-items: center;
+    margin: 10px
+}
 
+.buttons {
+    display: flex;
+    flex-direction: row;
+}
 </style>

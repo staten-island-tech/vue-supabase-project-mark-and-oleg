@@ -2,7 +2,7 @@
     <button @click="openGui">rizz</button>
 
     <div v-if="GUI" v-for="request in friendReqs" class="sploingus">
-        {{ request }}
+        {{ request.senderId }}
         <FriendRequests/>
     </div>
 </template>
@@ -14,22 +14,15 @@ import FriendRequests from '@/components/FriendRequests.vue'
 const friendReqs = ref()
 async function callFriendRequests(){
     const userData = await supabase.auth.getUser()
-    let sibidi = ref([])
+    console.log(userData)
     const { data } = await supabase
         .from('friendrequests')
         .select('senderId')
         .eq('receiverId', userData.data.user.id)
-        console.log(data.length - 1)
-    for(let i=0; i < data.length - 1, i++;){
-        let value = await supabase
-            .from('userdata')
-            .select('username')
-            .eq('uuid', data[i].senderId)
-        console.log(value)
-    }
-    
-    friendReqs.value = sibidi.value
+    console.log(data)
+    friendReqs.value = data
 }
+
 onMounted(() => {
     callFriendRequests()
 })

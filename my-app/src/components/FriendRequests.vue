@@ -35,7 +35,7 @@ async function acceptFriendRequest(senderId, receiverId) {
     const { data, error } = await supabase
         .from('friendrequests')
         .delete()
-        .eq('requestId', '41718784-34ea-4cda-9ec2-9ffc1380c5ee')
+        .eq('requestId', '360609c4-376f-453e-9516-d82310f8209b')
 
     if (error) {
         console.error('Error accepting friend request:', error.message);

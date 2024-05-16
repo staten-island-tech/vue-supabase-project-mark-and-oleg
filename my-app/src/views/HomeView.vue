@@ -23,7 +23,7 @@ async function sendFriendRequest(receiverId) {
 <template>
   <main>
     <AuthUser />
-    <button @click="sendFriendRequest('b586d532-4c7d-4f4a-a9e2-079208d166f2')">click to ePIC RIZZ</button>
+    <button @click="sendFriendRequest('2352fc04-0274-4d7d-8924-55b577f3c81d')">click to ePIC RIZZ</button>
   </main>
 </template>
 
