@@ -5,7 +5,7 @@ import { ref, onMounted } from 'vue'
 
 
 
-async function sendFriendRequest(receiverId: String) {
+async function sendFriendRequest(receiverId) {
   const userData = await supabase.auth.getUser();
     const userId = userData.data.user.id
     console.log(userId)
