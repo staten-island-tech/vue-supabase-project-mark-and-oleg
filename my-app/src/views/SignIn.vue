@@ -17,7 +17,8 @@ async function signInWithEmail() {
   })
   console.log(error)
   if(error === null){
-    console.log("whatthesigma")
+    console.log("whatthesigma");
+    location.reload();
   }else{
     alert(error)
   }
