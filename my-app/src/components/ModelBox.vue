@@ -6,15 +6,23 @@
 
 <script setup>
 import * as THREE from 'three';
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { ref, watch, onMounted, onBeforeUnmount } from 'vue';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+
+const props = defineProps({
+    rarity: {
+        type: String,
+        required: true
+    }
+});
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 0.1, 1000);
 camera.position.set(-15, 10, 30);
 const container = ref(null);
 let renderer = null;
+let isMounted = true;
 
 const initThree = () => {
     renderer = new THREE.WebGLRenderer({ alpha: true });
@@ -22,7 +30,6 @@ const initThree = () => {
     if (container.value) {
         container.value.appendChild(renderer.domElement);
     }
-
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.autoRotate = true;
@@ -33,14 +40,33 @@ const initThree = () => {
     const light = new THREE.AmbientLight(0x404040, 100);
     scene.add(light);
 
-    const loader = new GLTFLoader();
+    loadCrateModel(props.rarity);
 
-    let model;
+    function animate() {
+        if (!isMounted) return; // Stop animation if component is unmounted
+        requestAnimationFrame(animate);
+        controls.update();
+        renderer.render(scene, camera);
+    }
+
+    animate();
+};
+
+const loadCrateModel = (rarity) => {
+    const loader = new GLTFLoader();
+    let modelPath;
+
+    switch (rarity) {
+        case 'common':
+            modelPath = './Skibi.glb';
+            break;
+        
+    }
 
     loader.load(
-        './Skibi.glb',
+        modelPath,
         function (gltf) {
-            model = gltf.scene;
+            const model = gltf.scene;
             const bbox = new THREE.Box3().setFromObject(model);
             const center = bbox.getCenter(new THREE.Vector3());
             model.position.sub(center);
@@ -53,17 +79,10 @@ const initThree = () => {
             console.error(error);
         }
     );
-
-    function animate() {
-        requestAnimationFrame(animate);
-        controls.update();
-        renderer.render(scene, camera);
-    }
-
-    animate();
 };
 
 const destroyThree = () => {
+    isMounted = false; 
     if (renderer && renderer.domElement) {
         if (renderer.domElement.parentNode) {
             renderer.domElement.parentNode.removeChild(renderer.domElement);
@@ -74,14 +93,23 @@ const destroyThree = () => {
 };
 
 onMounted(() => {
+    isMounted = true; 
     initThree();
 });
 
 onBeforeUnmount(() => {
     destroyThree();
 });
+
+watch(() => props.rarity, (newRarity) => {
+    // Clean the scene and load new crate based on the updated rarity
+    while (scene.children.length > 0) {
+        scene.remove(scene.children[0]);
+    }
+    loadCrateModel(newRarity);
+});
 </script>
 
 <style lang="scss" scoped>
-
+/* Add your styles here */
 </style>
