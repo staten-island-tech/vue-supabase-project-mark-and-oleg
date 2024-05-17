@@ -45,7 +45,7 @@ async function buyBox(box) {
   flex-direction: column;
   align-items: center;
   width: 22%;
-  height: 1100px;
+  height: 550px;
   padding: 10px;
   margin: 10px;
   border: 1px solid #ccc;

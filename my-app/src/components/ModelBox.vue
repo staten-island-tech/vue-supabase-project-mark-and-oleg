@@ -26,13 +26,14 @@ let isMounted = true;
 
 const initThree = () => {
     renderer = new THREE.WebGLRenderer({ alpha: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(960, 540);
     if (container.value) {
         container.value.appendChild(renderer.domElement);
     }
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.autoRotate = true;
+    controls.autoRotateSpeed = 10;
     controls.enableZoom = false;
     controls.enableDamping = true;
     controls.update();
@@ -43,7 +44,7 @@ const initThree = () => {
     loadCrateModel(props.rarity);
 
     function animate() {
-        if (!isMounted) return; // Stop animation if component is unmounted
+        if (!isMounted) return; 
         requestAnimationFrame(animate);
         controls.update();
         renderer.render(scene, camera);
@@ -59,7 +60,13 @@ const loadCrateModel = (rarity) => {
     switch (rarity) {
         case 'common':
             modelPath = './Skibi.glb';
-            break;
+            
+        case 'uncommon':
+            modelPath = './Skibi.glb';
+        
+        case 'rare':
+            modelPath = './Skibi.glb'
+        
         
     }
 
@@ -102,7 +109,7 @@ onBeforeUnmount(() => {
 });
 
 watch(() => props.rarity, (newRarity) => {
-    // Clean the scene and load new crate based on the updated rarity
+
     while (scene.children.length > 0) {
         scene.remove(scene.children[0]);
     }
@@ -111,5 +118,5 @@ watch(() => props.rarity, (newRarity) => {
 </script>
 
 <style lang="scss" scoped>
-/* Add your styles here */
+
 </style>
