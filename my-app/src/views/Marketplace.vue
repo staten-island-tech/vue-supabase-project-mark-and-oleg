@@ -2,7 +2,7 @@
   <div class="skibidi">
     <div class="card" v-for="box in boxesList" :key="box.id">
       <h2>{{ box.item }}</h2>
-      <ModelBox :box="box" id="box" />
+      <ModelBox :box="box" id="box" v-for="(crate, index) in boxesList" :key="index" :rarity="crate.rarity" />
       <div class="model-container">
         
       </div>

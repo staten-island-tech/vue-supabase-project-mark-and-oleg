@@ -4,6 +4,7 @@ import { ref } from 'vue'
 export const boxesList = ref([
     {
         item: 'common crate',
+        rarity: 'common',
         value: 1,
         possibleLoot: [
             {
@@ -39,6 +40,7 @@ export const boxesList = ref([
     },
     {
         item: 'uncommon crate',
+        rarity: 'uncommon',
         value: 2,
         possibleLoot: [
             {
@@ -86,6 +88,7 @@ export const boxesList = ref([
     },
     {
         item: 'rare crate',
+        rarity: 'rare',
         value: 3,
         possibleLoot: [
             {
@@ -121,6 +124,7 @@ export const boxesList = ref([
     },
     {
         item: 'epic crate',
+        rarity: 'epic',
         value: 4,
         possibleLoot: [
             {
@@ -156,6 +160,7 @@ export const boxesList = ref([
     },
     {
         item: 'legendary crate',
+        rarity: 'legendary',
         value: 5,
         possibleLoot: [
             {
@@ -187,6 +192,7 @@ export const boxesList = ref([
     },
     {
         item: 'exotic crate',
+        rarity: 'exotic',
         value: 6,
         possibleLoot: [
             {
