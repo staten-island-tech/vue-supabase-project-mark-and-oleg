@@ -36,6 +36,7 @@ async function buyBox(box) {
   let inventory = oldSigmaData.data[0].inventory;
   inventory.push(box);
   await supabase.from('userdata').update({ inventory }).eq('uuid', userData.data.user.id);
+
 }
 </script>
 
