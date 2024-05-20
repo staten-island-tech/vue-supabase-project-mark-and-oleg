@@ -2,7 +2,7 @@
     <button @click="openGui">rizz</button>
 
     <div v-if="GUI" v-for="request in friendReqs" class="sploingus">
-        {{ request.senderId }}
+        {{ request }}
         <FriendRequests/>
     </div>
 </template>
@@ -14,22 +14,36 @@ import FriendRequests from '@/components/FriendRequests.vue'
 const friendReqs = ref()
 async function callFriendRequests(){
     const userData = await supabase.auth.getUser()
-    console.log(userData)
     const { data } = await supabase
         .from('friendrequests')
         .select('senderId')
         .eq('receiverId', userData.data.user.id)
-    console.log(data)
     friendReqs.value = data
+}
+let sibidi = ref([])
+async function getUsernameFriendRequests(){
+    await callFriendRequests()
+    console.log(friendReqs.value[0])
+    for(let i=0; i < friendReqs.value.length; i++){
+
+        const { data, error } = await supabase
+            .from('userdata')
+            .select('username')
+            .eq('uuid', friendReqs.value[i].senderId)
+        console.log(data, error)
+        sibidi.value.push(data[0])
+    }
+    friendReqs.value = sibidi.value
+    console.log(friendReqs.value, sibidi.value)
 }
 
 onMounted(() => {
-    callFriendRequests()
+    getUsernameFriendRequests()
 })
 const GUI = ref(false)
 function openGui(){
 
-    callFriendRequests()
+    getUsernameFriendRequests()
 
     GUI.value =! GUI.value
     console.log(GUI.value)
