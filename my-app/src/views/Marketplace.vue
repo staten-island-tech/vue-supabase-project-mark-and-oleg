@@ -54,16 +54,16 @@ async function buyBox(box) {
   align-items: center;
   justify-content: space-around;
 }
-.skibidi{
+.skibidi {
   display: flex;
   flex-wrap: wrap;
 }
-#box{
+#box {
   height: 100px;
 }
 .model-container {
   width: 100%;
-  height: 200px; /* Adjust as needed */
+  height: 200px; 
 }
 
 button {
@@ -79,7 +79,7 @@ button {
 button:hover {
   background-color: #0056b3;
 }
-.fortnite{
+.fortnite {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
