@@ -20,6 +20,14 @@ import { ref, onMounted } from 'vue'
 import { boxesList } from '@/stores/boxes.ts'
 import ModelBox from "@/components/ModelBox.vue"
 
+import BoxAnimations, { pauseAnimation } from '@/components/BoxAnimations.vue'
+
+const modelPath = 'path/to/your/model.glb';
+
+function playAnimation() {
+  pauseAnimation();
+}
+
 const countries = ref([]);
 
 async function getCountries() {
@@ -37,6 +45,7 @@ async function buyBox(box) {
   let inventory = oldSigmaData.data[0].inventory;
   inventory.push(box);
   await supabase.from('userdata').update({ inventory }).eq('uuid', userData.data.user.id);
+  playAnimation();
 }
 </script>
 
