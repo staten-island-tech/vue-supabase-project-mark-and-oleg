@@ -19,14 +19,14 @@ const props = defineProps({
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.set(-15, 10, 30);
+camera.position.set(-15, 5, 5);
 const container = ref(null);
 let renderer = null;
 let isMounted = true;
 
 const initThree = () => {
     renderer = new THREE.WebGLRenderer({ alpha: true });
-    renderer.setSize(960, 540);
+    renderer.setSize(480, 270);
     if (container.value) {
         container.value.appendChild(renderer.domElement);
     }
@@ -36,6 +36,7 @@ const initThree = () => {
     controls.autoRotateSpeed = 10;
     controls.enableZoom = false;
     controls.enableDamping = true;
+
     controls.update();
 
     const light = new THREE.AmbientLight(0x404040, 100);
@@ -59,15 +60,17 @@ const loadCrateModel = (rarity) => {
 
     switch (rarity) {
         case 'common':
-            modelPath = './Skibi.glb';
-            
+            modelPath = './SkibiCommon.glb';
+            break;
         case 'uncommon':
-            modelPath = './Skibi.glb';
-        
+            modelPath = './SkibiCommon.glb';
+            break;
         case 'rare':
-            modelPath = './Skibi.glb'
-        
-        
+            modelPath = './SkibiCommon.glb';
+            break;
+        // default:
+        //     modelPath = './SkibiDefault.glb';
+        //     break;
     }
 
     loader.load(
@@ -109,7 +112,6 @@ onBeforeUnmount(() => {
 });
 
 watch(() => props.rarity, (newRarity) => {
-
     while (scene.children.length > 0) {
         scene.remove(scene.children[0]);
     }
@@ -118,5 +120,8 @@ watch(() => props.rarity, (newRarity) => {
 </script>
 
 <style lang="scss" scoped>
+
+
+
 
 </style>

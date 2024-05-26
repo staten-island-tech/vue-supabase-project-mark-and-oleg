@@ -2,15 +2,16 @@
   <div class="skibidi">
     <div class="card" v-for="box in boxesList" :key="box.id">
       <h2>{{ box.item }}</h2>
-      <ModelBox :box="box" id="box" v-for="(crate) in boxesList" :rarity="crate.rarity" />
       <div class="model-container">
-        
+        <ModelBox v-if="box.rarity === 'common'" :box="box" :rarity="box.rarity" class="common-model" />
+        <ModelBox v-if="box.rarity === 'uncommon'" :box="box" :rarity="box.rarity" class="uncommon-model" />
+        <ModelBox v-if="box.rarity === 'rare'" :box="box" :rarity="box.rarity" class="rare-model" />
       </div>
       <button @click="buyBox(box)">Buy Box</button>
     </div>
   </div>
   <h1>USER MARKETPLACE</h1>
-    <div class="usermarket" v-for="item in countries" :key="item.id">{{ item }}</div>
+  <div class="usermarket" v-for="item in countries" :key="item.id">{{ item }}</div>
 </template>
 
 <script setup lang="ts">
@@ -36,7 +37,6 @@ async function buyBox(box) {
   let inventory = oldSigmaData.data[0].inventory;
   inventory.push(box);
   await supabase.from('userdata').update({ inventory }).eq('uuid', userData.data.user.id);
-
 }
 </script>
 
@@ -51,19 +51,37 @@ async function buyBox(box) {
   margin: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  align-items: center;
   justify-content: space-around;
+  position: relative;
 }
-.skibidi {
-  display: flex;
-  flex-wrap: wrap;
-}
-#box {
-  height: 100px;
-}
+
 .model-container {
   width: 100%;
-  height: 200px; 
+  height: 200px;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+
+.common-model {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.uncommon-model {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.rare-model {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 button {
@@ -79,14 +97,22 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+
+.skibidi {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .fortnite {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
-.usermarket{
+
+.usermarket {
   display: flex;
   flex-direction: column;
-  
 }
+
+
 </style>
