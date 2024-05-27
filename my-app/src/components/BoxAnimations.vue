@@ -25,7 +25,7 @@
   
     const loader = new GLTFLoader();
     loader.load(
-      'SkibAnimation.glb',
+      './SkibAnimation.glb',
       function (gltf) {
         const model = gltf.scene;
         scene.add(model);
