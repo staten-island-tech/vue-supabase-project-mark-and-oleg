@@ -1,7 +1,8 @@
 <template>
     <button @click="openGui">rizz</button>
 
-    <div v-if="GUI" v-for="request in friendReqs" class="sploingus">
+    <div v-if="GUI" v-for="request in sibidi" class="sploingus">
+        <h1 v-if="!loaded"> loading...</h1>
         {{ request }}
         <FriendRequests/>
     </div>
@@ -23,6 +24,7 @@ async function callFriendRequests(){
 let sibidi = ref([])
 async function getUsernameFriendRequests(){
     await callFriendRequests()
+    sibidi.value = []
     console.log(friendReqs.value[0])
     for(let i=0; i < friendReqs.value.length; i++){
 
@@ -41,11 +43,12 @@ onMounted(() => {
     getUsernameFriendRequests()
 })
 const GUI = ref(false)
-function openGui(){
-
-    getUsernameFriendRequests()
-
+let loaded = ref(false)
+async function openGui(){
+    loaded.value = false
     GUI.value =! GUI.value
+    await getUsernameFriendRequests()
+    loaded.value = true
     console.log(GUI.value)
 }
 </script>
