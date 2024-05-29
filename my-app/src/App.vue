@@ -3,7 +3,7 @@ import { RouterLink, RouterView } from 'vue-router'
 import UserInbox from '@/components/UserInbox.vue'
 import { supabase } from '@/lib/supabaseClient.js'
 import { ref, onMounted } from 'vue'
-
+import Searchbar from '@/components/Searchbar.vue'
 
 
 
@@ -47,6 +47,7 @@ onMounted(()=>{
 
     <button class="button-38"><UserInbox/></button>
   </div>
+  <Searchbar/>
   
   <RouterView />
 </template>
