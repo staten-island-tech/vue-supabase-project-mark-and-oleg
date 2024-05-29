@@ -1,5 +1,5 @@
 <template>
-        <button @click="acceptFriendRequest(userId, '111a0e72-b446-45b3-923a-1bac38550508')">fanum toilet</button>
+        <button @click="acceptFriendRequest(userId, '2352fc04-0274-4d7d-8924-55b577f3c81d')">fanum toilet</button>
         <button @click="fart">skib</button>
 </template>
 
@@ -14,11 +14,15 @@ async function rizztoilet(){
     userId.value = userData.data.user.id
 }
 async function fart(){
-    let userFriends = await supabase
+    let callreq = await supabase
         .from('userdata')
         .select('friends')
         .eq('uuid', userId.value)
+    let userFriends = callreq.data[0].friends
+    userFriends.push('skibidi')
     console.log(userFriends)
+
+
 }
 onMounted(()=>{
     rizztoilet()
@@ -40,7 +44,7 @@ async function acceptFriendRequest(senderId, receiverId) {
     const { data, error } = await supabase
         .from('friendrequests')
         .delete()
-        .eq('requestId', '875e8506-4e59-49ef-8047-b2fce4ead998')
+        .eq('requestId', '6d1ca571-d390-4164-a5f0-f1f7d8b78c34')
 
     if (error) {
         console.error('Error accepting friend request:', error.message);
@@ -63,14 +67,20 @@ async function rejectFriendRequest(requestId) {
 }
 
 async function addFriend(receiverId, senderId) {
-    let userFriends = await supabase
+    let callreq = await supabase
         .from('userdata')
         .select('friends')
         .eq('uuid', receiverId)
-    console.log(userFriends)
+    console.log(callreq.data[0])
+    let userFriends = callreq.data[0].friends
+    let senderUsername = await supabase
+        .from('userdata')
+        .select('username')
+        .eq('uuid', senderId)
+    userFriends.push(senderId)
     await supabase
         .from('userdata')
-        .update([{ friends: senderId }])
+        .update([{ friends: userFriends }])
         .eq('uuid', receiverId )
 }
 

@@ -33,7 +33,7 @@ async function getUsernameFriendRequests(){
             .select('username')
             .eq('uuid', friendReqs.value[i].senderId)
         console.log(data, error)
-        sibidi.value.push(data[0])
+        sibidi.value.push(data[0].username)
     }
     friendReqs.value = sibidi.value
     console.log(friendReqs.value, sibidi.value)
