@@ -2,7 +2,7 @@
 import AuthUser from "../components/AuthUser.vue"
 import { supabase } from '@/lib/supabaseClient.js'
 import { ref, onMounted } from 'vue'
-
+import Searchbar from '@/components/Searchbar.vue'
 
 
 async function sendFriendRequest(receiverId) {

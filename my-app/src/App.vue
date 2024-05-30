@@ -39,15 +39,16 @@ onMounted(()=>{
     
     <button class="button-38"><RouterLink to="/market">Market</RouterLink></button>
 
+    <Searchbar/>
+
     <button class="button-38"><RouterLink to="/profile">Profile</RouterLink></button>
 
     <button class="button-38"><RouterLink to="/signin">Sign In</RouterLink></button>
 
     <button class="button-38"><RouterLink to="/trade">Trade</RouterLink></button>
 
-    <button class="button-38"><UserInbox/></button>
   </div>
-  <Searchbar/>
+  <button class="button-38"><UserInbox/></button>
   
   <RouterView />
 </template>
@@ -57,7 +58,6 @@ onMounted(()=>{
 
 .wrapper {
   display: flex;
-  place-items: flex-start;
   flex-wrap: wrap;
   align-items: center;
 

@@ -31,7 +31,14 @@ const router = createRouter({
       path: '/trade',
       name: 'trade',
       component: () => import('../views/TradeView.vue')
+    },
+    {
+      path: '/others/:id',
+      name: 'others',
+      component: () => import('../views/skib.vue') 
     }
+    
+    
   ]
 })
 
