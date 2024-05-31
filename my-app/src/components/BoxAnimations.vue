@@ -56,7 +56,7 @@
   });
   
   export function pauseAnimation() {
-    if (mixer) mixer.timeScale = 0; // Pause animation
+    if (mixer) mixer.timeScale = 0; 
   }
   </script>
   
