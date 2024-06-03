@@ -35,6 +35,7 @@ const initThree = () => {
     controls.autoRotate = true;
     controls.autoRotateSpeed = 10;
     controls.enableZoom = false;
+    controls.enableRotate = false;
     controls.enableDamping = true;
 
     controls.update();

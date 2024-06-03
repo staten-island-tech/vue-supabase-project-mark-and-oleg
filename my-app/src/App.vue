@@ -4,6 +4,7 @@ import UserInbox from '@/components/UserInbox.vue'
 import { supabase } from '@/lib/supabaseClient.js'
 import { ref, onMounted } from 'vue'
 import Searchbar from '@/components/Searchbar.vue'
+import money from '@/stores/money.ts'
 
 
 
@@ -26,9 +27,11 @@ onMounted(()=>{
 </script>
 
 <template>
+ 
   <div class="alert" v-if="sigma">
       <h2>Hello, {{ rizzler.data.user.user_metadata.alias }}</h2>
   </div>
+  <h2>Money {{ money }}</h2>
   <div v-if="!sigma">
     <button class="button-38"><RouterLink to="/">Home</RouterLink></button>
 
