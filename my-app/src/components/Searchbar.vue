@@ -1,8 +1,8 @@
 <template>
 <form type="search" class="formfirst">
     <label for="search" class="label">Search for stuff</label>
-    <input class="search" type="search" v-model="val" placeholder="Search for products..." required />
-    <button :to="searchPath" type="submit" class="submitter">SKIBIDI</button>
+    <input class="search" type="search" v-model="val" placeholder="Search for sigmas..." required />
+    <button :to="searchPath" class="submitter">SKIBIDI</button>
 </form>
 </template>
 
@@ -11,7 +11,7 @@ import { ref, computed } from 'vue'
 import UserInbox from '@/components/UserInbox.vue'
 let val = ref()
 const searchPath = computed(() =>{ 
-    return `/others/${val}`
+  return `/others/${val}`
 })
 </script>
 
