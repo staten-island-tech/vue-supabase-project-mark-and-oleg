@@ -6,6 +6,9 @@
         <ModelBox v-if="box.rarity === 'common'" :box="box" :rarity="box.rarity" class="common-model" />
         <ModelBox v-if="box.rarity === 'uncommon'" :box="box" :rarity="box.rarity" class="uncommon-model" />
         <ModelBox v-if="box.rarity === 'rare'" :box="box" :rarity="box.rarity" class="rare-model" />
+        <ModelBox v-if="box.rarity === 'epic'" :box="box" :rarity="box.rarity" class="rare-model" />
+        <ModelBox v-if="box.rarity === 'legendary'" :box="box" :rarity="box.rarity" class="rare-model" />
+        <ModelBox v-if="box.rarity === 'exotic'" :box="box" :rarity="box.rarity" class="rare-model" />
       </div>
       <button @click="buyBox(box)">Buy Box</button>
     </div>

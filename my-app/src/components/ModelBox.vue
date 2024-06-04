@@ -61,10 +61,10 @@ const loadCrateModel = (rarity) => {
 
     switch (rarity) {
         case 'common':
-            modelPath = './SkibiCommon.glb';
+            modelPath = './SkibCommon.glb';
             break;
         case 'uncommon':
-            modelPath = './SkibiCommon.glb';
+            modelPath = './SkibUncommon.glb';
             break;
         case 'rare':
             modelPath = './SkibiCommon.glb';
