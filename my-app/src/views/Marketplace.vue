@@ -28,24 +28,18 @@ import { ref, onMounted } from 'vue'
 import { boxesList } from '@/stores/boxes.ts'
 import ModelBox from "@/components/ModelBox.vue"
 
+const commAnime = './SkibCommonAnimation.mkv'
 
 
-const countries = ref([]);
 
-async function getCountries() {
-  const { data } = await supabase.from('usermarket').select();
-  countries.value = data;
-}
-
-onMounted(() => {
-  getCountries();
-});
 
 async function buyBox(box) {
   const userData = await supabase.auth.getUser();
   const oldSigmaData = await supabase.from('userdata').select().eq('uuid', userData.data.user.id);
   let inventory = oldSigmaData.data[0].inventory;
   inventory.push(box);
+
+  
   await supabase.from('userdata').update({ inventory }).eq('uuid', userData.data.user.id);
 }
 </script>
