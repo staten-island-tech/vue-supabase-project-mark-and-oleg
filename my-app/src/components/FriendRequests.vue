@@ -1,5 +1,5 @@
 <template>
-        <button @click="acceptFriendRequest('111a0e72-b446-45b3-923a-1bac38550508', userId)">fanum toilet</button>
+        <button @click="acceptFriendRequest(userId, '111a0e72-b446-45b3-923a-1bac38550508')">fanum toilet</button>
         <button @click="fart">skib</button>
 </template>
 
@@ -14,7 +14,7 @@ async function rizztoilet(){
     userId.value = userData.data.user.id
 }
 async function fart(){
-    let requestId = await supabase.from('friendrequests').select().eq('senderId', '111a0e72-b446-45b3-923a-1bac38550508')
+    let requestId = await supabase.from('friendrequests').select().eq('senderId', 'b586d532-4c7d-4f4a-a9e2-079208d166f2').eq('receiverId', userId.value)
     console.log(requestId)
 }
 onMounted(()=>{

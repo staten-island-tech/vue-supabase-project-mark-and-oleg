@@ -11,7 +11,8 @@ export const boxesList = ref([
                 item: 'regular skibidi toilet',
                 itemType: 'skibidi',
                 itemrarity: 'common',
-                probability: .25
+                probability: .25,
+                imageLink: 
             },
             {
                 item: 'regular cameraman',

@@ -2,7 +2,7 @@
 <form type="search" class="formfirst">
     <label for="search" class="label">Search for stuff</label>
     <input class="search" type="search" v-model="val" placeholder="Search for sigmas..." required />
-    <button :to="searchPath" class="submitter">SKIBIDI</button>
+    <router-link :to="searchPath" class="submitter">find sigma</router-link>
 </form>
 </template>
 
@@ -11,7 +11,7 @@ import { ref, computed } from 'vue'
 import UserInbox from '@/components/UserInbox.vue'
 let val = ref()
 const searchPath = computed(() =>{ 
-  return `/others/${val}`
+  return `/others/${val.value}`
 })
 </script>
 
@@ -66,10 +66,7 @@ template{
     font-size: 1.2rem;
 }
 .submitter{
-    display: none;
-    position: absolute;
-    top: 0;
-    right: 0;
+    position: relative;
     width: var(--btn-width);
     font-weight: bold;
     background-color: var(--color-brand-slightly-less-lighter-than-normal-color-brand);
