@@ -12,7 +12,6 @@ export const boxesList = ref([
                 itemType: 'skibidi',
                 itemrarity: 'common',
                 probability: .25,
-                imageLink: 
             },
             {
                 item: 'regular cameraman',

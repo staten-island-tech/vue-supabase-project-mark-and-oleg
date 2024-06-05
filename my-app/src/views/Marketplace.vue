@@ -5,16 +5,21 @@
       <div class="model-container">
         <ModelBox v-if="box.rarity === 'common'" :box="box" :rarity="box.rarity" class="common-model" />
         <ModelBox v-if="box.rarity === 'uncommon'" :box="box" :rarity="box.rarity" class="uncommon-model" />
-        <ModelBox v-if="box.rarity === 'rare'" :box="box" :rarity="box.rarity" class="rare-model" />
+<!--         <ModelBox v-if="box.rarity === 'rare'" :box="box" :rarity="box.rarity" class="rare-model" />
         <ModelBox v-if="box.rarity === 'epic'" :box="box" :rarity="box.rarity" class="rare-model" />
         <ModelBox v-if="box.rarity === 'legendary'" :box="box" :rarity="box.rarity" class="rare-model" />
-        <ModelBox v-if="box.rarity === 'exotic'" :box="box" :rarity="box.rarity" class="rare-model" />
+        <ModelBox v-if="box.rarity === 'exotic'" :box="box" :rarity="box.rarity" class="rare-model" /> -->
       </div>
       <button @click="buyBox(box)">Buy Box</button>
     </div>
   </div>
-  <h1>USER MARKETPLACE</h1>
-  <div class="usermarket" v-for="item in countries" :key="item.id">{{ item }}</div>
+  <div class="mart">
+    <h1>USER MARKETPLACE</h1>
+    <div class="usermarket" v-for="item in countries" :key="item.id">
+      {{ item }}
+      <button @click="" class="munt">throgg</button>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -46,6 +51,15 @@ async function buyBox(box) {
 </script>
 
 <style scoped>
+.mart{
+  margin-bottom: 5%;
+}
+.munt{
+  height: 50px;
+  width: 150px;
+  display: flex;
+  align-items: center;
+}
 .card {
   display: flex;
   flex-direction: column;
@@ -117,6 +131,8 @@ button:hover {
 .usermarket {
   display: flex;
   flex-direction: column;
+  width: 15%;
+
 }
 
 
