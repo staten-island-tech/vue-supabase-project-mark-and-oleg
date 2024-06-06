@@ -19,7 +19,14 @@ async function callFriendRequests(){
         .from('friendrequests')
         .select('senderId')
         .eq('receiverId', userData.data.user.id)
-    friendReqs.value = data
+    if(data.length > 0){
+        console.log('felch', )
+        friendReqs.value = data
+    }else{
+        friendReqs.value = ['no friend requests (fucking loser)']
+        console.log('felch')
+    }
+
 }
 let sibidi = ref([])
 async function getUsernameFriendRequests(){

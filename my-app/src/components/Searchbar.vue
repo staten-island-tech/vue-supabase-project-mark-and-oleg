@@ -13,6 +13,7 @@ let val = ref()
 const searchPath = computed(() =>{ 
   return `/others/${val.value}`
 })
+
 </script>
 
 <style scoped>

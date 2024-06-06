@@ -11,9 +11,12 @@
   </div>
   <div class="mart">
     <h1>USER MARKETPLACE</h1>
-    <div class="usermarket" v-for="item in countries" :key="item.id">
-      {{ item }}
-      <button @click="" class="munt">throgg</button>
+    <h2>total current value of market: {{ totalmarketvalue }}</h2>
+    <div class="gyatt">
+      <div class="usermarket" v-for="item in usermarket" :key="item.id">
+        {{ item }}
+        <button @click="buyOffMarket(item)" class="munt">throgg</button>
+      </div>
     </div>
   </div>
 </template>
@@ -29,13 +32,39 @@ interface Box {
   item: string;
   rarity: 'common' | 'uncommon'; 
 }
+let totalmarketvalue = ref(0)
+let usermarket = ref()
+
+async function rizz() {
+  totalmarketvalue.value = 0
+  const { data } = await supabase.from('usermarket').select();
+  data.forEach((val)=>{
+    totalmarketvalue.value = totalmarketvalue.value + val.sellPrice
+  }) 
+  usermarket.value = data;
+}
+
+async function buyOffMarket(fard: Object){
+  let productId = fard.uuid
+  await supabase
+    .from('usermarket')
+    .delete()
+    .eq('uuid', productId)
+  const userData = await supabase.auth.getUser();
+  const { data: oldSigmaData } = await supabase.from('userdata').select().eq('uuid', userData.data.user.id);
+  let inventory = oldSigmaData[0].inventory;
+  inventory.push(fard)
+  await supabase
+    .from('userdata')
+    .update({ inventory })
+    .eq('uuid', userData.data.user.id)
+  rizz()
+}
+onMounted(() => {
+  rizz();
+});
 
 
-const boxesList = ref<Box[]>([
-  { id: 1, item: 'Common Crate', rarity: 'common' },
-  { id: 2, item: 'Uncommon Crate', rarity: 'uncommon' },
- 
-]);
 
 
 
@@ -56,8 +85,14 @@ async function buyBox(box: Box) {
 <style scoped>
 .mart {
   margin-bottom: 5%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
 }
-
+.gyatt{
+  display: flex;
+  flex-wrap: wrap;
+}
 .munt {
   height: 50px;
   width: 150px;
