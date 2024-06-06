@@ -2,10 +2,8 @@
 
 import { supabase } from '@/lib/supabaseClient.js'
 import { ref } from 'vue'
-import { useRouter } from 'vue-router';
 let username = ref()
 let password = ref()
-const router = useRouter();
 
 async function signInWithEmail() {
   const { data, error } = await supabase.auth.signInWithPassword({
@@ -19,14 +17,8 @@ async function signInWithEmail() {
   })
   console.log(error)
   if(error === null){
-<<<<<<< Updated upstream
     console.log("whatthesigma");
     location.reload();
-=======
-    console.log("whatthesigma")
-    router.push('/market')
-    setTimeout(() => {  location.reload() }, 100)
->>>>>>> Stashed changes
   }else{
     alert(error)
   }

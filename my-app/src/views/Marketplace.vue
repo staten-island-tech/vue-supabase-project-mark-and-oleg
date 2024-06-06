@@ -1,5 +1,4 @@
 <template>
-<<<<<<< Updated upstream
   <div class="skibidi">
     <div class="card" v-for="box in boxesList" :key="box.id">
       <h2>{{ box.item }}</h2>
@@ -16,20 +15,7 @@
       {{ item }}
       <button @click="" class="munt">throgg</button>
     </div>
-=======
-  <div class="container">
-    <div class="card" v-for="box in boxesList" :key="box.id">
-      <h2>{{ box.item }}</h2>
-
-      <div class="model-container">
-        <ModelBox :box="box"/>
-      </div>
-      <button @click="buyBox(box)">Buy Box</button>
-    </div>
->>>>>>> Stashed changes
   </div>
-  <h1>USER MARKETPLACE</h1>
-    <div class="usermarket" v-for="item in countries" :key="item.id">{{ item }}</div>
 </template>
 
 <script setup lang="ts">
@@ -83,12 +69,8 @@ async function buyBox(box: Box) {
   display: flex;
   flex-direction: column;
   align-items: center;
-<<<<<<< Updated upstream
   width: 22%;
   height: 550px;
-=======
-  width: 18%;
->>>>>>> Stashed changes
   padding: 10px;
   margin: 10px;
   border: 1px solid #ccc;
@@ -98,7 +80,6 @@ async function buyBox(box: Box) {
 }
 
 .model-container {
-<<<<<<< Updated upstream
   width: 100%;
   height: 200px;
   position: relative;
@@ -133,7 +114,6 @@ button {
 button:hover {
   background-color: #0056b3;
 }
-<<<<<<< Updated upstream
 
 .skibidi {
   display: flex;
@@ -141,9 +121,6 @@ button:hover {
 }
 
 .fortnite {
-=======
-.container{
->>>>>>> Stashed changes
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

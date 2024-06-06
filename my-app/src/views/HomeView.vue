@@ -23,11 +23,7 @@ async function sendFriendRequest(receiverId) {
 <template>
   <main>
     <AuthUser />
-<<<<<<< Updated upstream
     <button @click="sendFriendRequest('111a0e72-b446-45b3-923a-1bac38550508')">click to ePIC RIZZ</button>
-=======
-    <button @click="sendFriendRequest('2352fc04-0274-4d7d-8924-55b577f3c81d')">click to ePIC RIZZ</button>
->>>>>>> Stashed changes
   </main>
 </template>
 
