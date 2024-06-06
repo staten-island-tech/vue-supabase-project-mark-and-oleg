@@ -5,10 +5,6 @@
       <div class="model-container">
         <ModelBox v-if="box.rarity === 'common'" :box="box" :rarity="box.rarity" class="common-model" />
         <ModelBox v-if="box.rarity === 'uncommon'" :box="box" :rarity="box.rarity" class="uncommon-model" />
-<!--         <ModelBox v-if="box.rarity === 'rare'" :box="box" :rarity="box.rarity" class="rare-model" />
-        <ModelBox v-if="box.rarity === 'epic'" :box="box" :rarity="box.rarity" class="rare-model" />
-        <ModelBox v-if="box.rarity === 'legendary'" :box="box" :rarity="box.rarity" class="rare-model" />
-        <ModelBox v-if="box.rarity === 'exotic'" :box="box" :rarity="box.rarity" class="rare-model" /> -->
       </div>
       <button @click="buyBox(box)">Buy Box</button>
     </div>
@@ -23,37 +19,70 @@
 </template>
 
 <script setup lang="ts">
-import { supabase } from '@/lib/supabaseClient.js'
-import { ref, onMounted } from 'vue'
-import { boxesList } from '@/stores/boxes.ts'
-import ModelBox from "@/components/ModelBox.vue"
+import { ref, onMounted } from 'vue';
+import { supabase } from '@/lib/supabaseClient.js';
+import { boxesList } from '@/stores/boxes.ts';
+import ModelBox from "@/components/ModelBox.vue";
 
-const commAnime = './SkibCommonAnimation.mkv'
-
-
-
-
-async function buyBox(box) {
-  const userData = await supabase.auth.getUser();
-  const oldSigmaData = await supabase.from('userdata').select().eq('uuid', userData.data.user.id);
-  let inventory = oldSigmaData.data[0].inventory;
-  inventory.push(box);
-
-  
-  await supabase.from('userdata').update({ inventory }).eq('uuid', userData.data.user.id);
+interface Box {
+  id: number;
+  item: string;
+  rarity: 'common' | 'uncommon'; 
 }
+
+
+const boxesList = ref<Box[]>([
+  { id: 1, item: 'Common Crate', rarity: 'common' },
+  { id: 2, item: 'Uncommon Crate', rarity: 'uncommon' },
+ 
+]);
+
+
+const videoPaths: Record<'common' | 'uncommon', string> = {
+  common: './SkibUncommonAnimation.mkv',
+  uncommon: './Skib1.mkv',
+
+};
+
+async function buyBox(box: Box) {
+  const userData = await supabase.auth.getUser();
+  const { data: oldSigmaData } = await supabase.from('userdata').select().eq('uuid', userData.data.user.id);
+  let inventory = oldSigmaData[0].inventory;
+  inventory.push(box);
+  await supabase.from('userdata').update({ inventory }).eq('uuid', userData.data.user.id);
+  playVideo(videoPaths[box.rarity]);
+}
+
+function playVideo(videoPath: string) {
+  const videoElement = document.createElement('video');
+  videoElement.src = videoPath;
+  videoElement.autoplay = true;
+  videoElement.style.position = 'fixed';
+  videoElement.style.top = '50%';
+  videoElement.style.left = '50%';
+  videoElement.style.transform = 'translate(-50%, -50%)';
+  videoElement.style.zIndex = '1000';
+  videoElement.onended = () => {
+    document.body.removeChild(videoElement);
+  };
+  document.body.appendChild(videoElement);
+}
+
+
 </script>
 
 <style scoped>
-.mart{
+.mart {
   margin-bottom: 5%;
 }
-.munt{
+
+.munt {
   height: 50px;
   width: 150px;
   display: flex;
   align-items: center;
 }
+
 .card {
   display: flex;
   flex-direction: column;
@@ -90,13 +119,6 @@ async function buyBox(box) {
   transform: translate(-50%, -50%);
 }
 
-.rare-model {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
 button {
   margin-top: 10px;
   cursor: pointer;
@@ -126,8 +148,5 @@ button:hover {
   display: flex;
   flex-direction: column;
   width: 15%;
-
 }
-
-
 </style>

@@ -33,7 +33,7 @@ const initThree = () => {
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.autoRotate = true;
-    controls.autoRotateSpeed = 10;
+    controls.autoRotateSpeed = 7;
     controls.enableZoom = false;
     controls.enableRotate = false;
     controls.enableDamping = true;
