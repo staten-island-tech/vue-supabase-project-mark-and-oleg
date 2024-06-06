@@ -38,11 +38,7 @@ const boxesList = ref<Box[]>([
 ]);
 
 
-const videoPaths: Record<'common' | 'uncommon', string> = {
-  common: './SkibUncommonAnimation.mkv',
-  uncommon: './Skib1.mkv',
 
-};
 
 async function buyBox(box: Box) {
   const userData = await supabase.auth.getUser();
@@ -50,23 +46,9 @@ async function buyBox(box: Box) {
   let inventory = oldSigmaData[0].inventory;
   inventory.push(box);
   await supabase.from('userdata').update({ inventory }).eq('uuid', userData.data.user.id);
-  playVideo(videoPaths[box.rarity]);
+  
 }
 
-function playVideo(videoPath: string) {
-  const videoElement = document.createElement('video');
-  videoElement.src = videoPath;
-  videoElement.autoplay = true;
-  videoElement.style.position = 'fixed';
-  videoElement.style.top = '50%';
-  videoElement.style.left = '50%';
-  videoElement.style.transform = 'translate(-50%, -50%)';
-  videoElement.style.zIndex = '1000';
-  videoElement.onended = () => {
-    document.body.removeChild(videoElement);
-  };
-  document.body.appendChild(videoElement);
-}
 
 
 </script>
