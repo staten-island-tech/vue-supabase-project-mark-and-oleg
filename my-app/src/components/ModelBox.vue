@@ -66,8 +66,8 @@ const loadCrateModel = (rarity) => {
         case 'uncommon':
             modelPath = './SkibUncommon.glb';
             break;
-        case 'rare':
-            modelPath = './SkibiCommon.glb';
+        case 'epic':
+            modelPath = './SkibEpic.glb';
             break;
         // default:
         //     modelPath = './SkibiDefault.glb';

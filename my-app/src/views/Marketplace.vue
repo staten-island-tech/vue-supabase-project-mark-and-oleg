@@ -5,6 +5,7 @@
       <div class="model-container">
         <ModelBox v-if="box.rarity === 'common'" :box="box" :rarity="box.rarity" class="common-model" />
         <ModelBox v-if="box.rarity === 'uncommon'" :box="box" :rarity="box.rarity" class="uncommon-model" />
+        <ModelBox v-if="box.rarity === 'epic'" :box="box" :rarity="box.rarity" class="epic-model" />
       </div>
       <button @click="buyBox(box)">Buy Box</button>
     </div>
@@ -30,12 +31,13 @@ import ModelBox from "@/components/ModelBox.vue";
 interface Box {
   id: number;
   item: string;
-  rarity: 'common' | 'uncommon'; 
+  rarity: 'common' | 'uncommon' | 'epic'; 
 }
 
 let totalmarketvalue = ref(0)
 let usermarket = ref()
 
+<<<<<<< Updated upstream
 async function rizz() {
   totalmarketvalue.value = 0
   const { data } = await supabase.from('usermarket').select();
@@ -64,6 +66,14 @@ async function buyOffMarket(fard: Object){
 onMounted(() => {
   rizz();
 });
+=======
+const boxesList = ref<Box[]>([
+  { id: 1, item: 'Common Crate', rarity: 'common' },
+  { id: 2, item: 'Uncommon Crate', rarity: 'uncommon' },
+  { id: 3, item: 'Epic Crate', rarity: 'epic'}
+ 
+]);
+>>>>>>> Stashed changes
 
 
 
@@ -121,19 +131,14 @@ async function buyBox(box: Box) {
   align-items: center;
 }
 
-.common-model {
+.common-model, .uncommon-model, .epic-model {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-.uncommon-model {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+
 
 button {
   margin-top: 10px;
