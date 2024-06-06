@@ -5,7 +5,6 @@
       <div class="model-container">
         <ModelBox v-if="box.rarity === 'common'" :box="box" :rarity="box.rarity" class="common-model" />
         <ModelBox v-if="box.rarity === 'uncommon'" :box="box" :rarity="box.rarity" class="uncommon-model" />
-        <ModelBox v-if="box.rarity === 'epic'" :box="box" :rarity="box.rarity" class="epic-model" />
       </div>
       <button @click="buyBox(box)">Buy Box</button>
     </div>
@@ -28,14 +27,13 @@ import ModelBox from "@/components/ModelBox.vue";
 interface Box {
   id: number;
   item: string;
-  rarity: 'common' | 'uncommon' | 'epic'; 
+  rarity: 'common' | 'uncommon'; 
 }
 
 
 const boxesList = ref<Box[]>([
   { id: 1, item: 'Common Crate', rarity: 'common' },
   { id: 2, item: 'Uncommon Crate', rarity: 'uncommon' },
-  { id: 3, item: 'Epic Crate', rarity: 'epic' },
  
 ]);
 
@@ -89,14 +87,19 @@ async function buyBox(box: Box) {
   align-items: center;
 }
 
-.common-model, .uncommon-model, .epic-model {
+.common-model {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-
+.uncommon-model {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
 button {
   margin-top: 10px;
