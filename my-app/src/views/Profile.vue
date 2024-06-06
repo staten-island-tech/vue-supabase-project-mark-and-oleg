@@ -33,7 +33,7 @@ interface InventoryItem {
 
 let userInv = ref<InventoryItem[]>([]);
 
- showGui = ref(false);
+let showGui = ref(false);
 let userID = ref(null)
 let inventory = ref('')
 let price = ref()
