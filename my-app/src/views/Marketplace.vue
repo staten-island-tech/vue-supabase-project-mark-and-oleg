@@ -37,7 +37,6 @@ interface Box {
 let totalmarketvalue = ref(0)
 let usermarket = ref()
 
-<<<<<<< Updated upstream
 async function rizz() {
   totalmarketvalue.value = 0
   const { data } = await supabase.from('usermarket').select();
@@ -66,14 +65,6 @@ async function buyOffMarket(fard: Object){
 onMounted(() => {
   rizz();
 });
-=======
-const boxesList = ref<Box[]>([
-  { id: 1, item: 'Common Crate', rarity: 'common' },
-  { id: 2, item: 'Uncommon Crate', rarity: 'uncommon' },
-  { id: 3, item: 'Epic Crate', rarity: 'epic'}
- 
-]);
->>>>>>> Stashed changes
 
 
 

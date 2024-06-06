@@ -49,6 +49,7 @@ interface Box {
 const videoPaths: Record<'common' | 'uncommon', String> = {
   common: './SkibUncommonAnimation.mkv',
   uncommon: './Skib1.mkv',
+  epic: './SkibEpicAnimation.mkv',
 };
 
 function playVideo(videoPath: String) {
