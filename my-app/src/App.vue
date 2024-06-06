@@ -32,7 +32,7 @@ onMounted(()=>{
       <h2>Hello, {{ rizzler.data.user.user_metadata.alias }}</h2>
   </div>
   <div v-if="!sigma">
-    <button class="button-38"><RouterLink to="/">Home</RouterLink></button>
+    <button class="button-38"><RouterLink to="/">Register</RouterLink></button>
 
     <button class="button-38"><RouterLink to="/signin">Sign In</RouterLink></button>
   </div>
