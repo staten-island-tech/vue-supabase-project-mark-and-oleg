@@ -1,30 +1,38 @@
 <template>
     <div>
-        <h1>{{ fard }}</h1>
+      <h1>{{ fard.alias }}</h1>
+      <h2>{{ fard.friends }}</h2>
+      <h3>{{ fard.inventory }}</h3>
     </div>
-</template>
+  </template>
+  
+  <script setup lang="ts">
+  import { ref, onMounted, onUpdated } from 'vue';
+  import { supabase } from '@/lib/supabaseClient.js'
+  import { useRoute } from 'vue-router';
 
-<script>
-export default {
-    data(){
-        return{
-            fard: {}
-        }
-    },
-    mounted: async function(){
-        await this.getURL()
-    },
-    methods:{
-        getURL:
-            async function(){
-                let poopy = this.$route.params.id
-                this.fard = poopy
-            }
-        
+  const fard = ref({});
+  
+  const route = useRoute();
+  
+  const getURL = async () => {
+    let poopy = route.params.id;
+    const { data } = await supabase
+        .from('userdata')
+        .select()
+        .eq('alias', poopy)
+    if(data.length > 0){
+        fard.value = data[0]
+    }else{
+        fard.value = 'no people found'
     }
-}
-</script>
+  };
+  
+  onMounted(async () => {
+    await getURL();
+  });
 
-<style scoped>
+  </script>
+  <style scoped>
 
 </style>

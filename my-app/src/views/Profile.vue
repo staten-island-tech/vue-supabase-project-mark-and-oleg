@@ -3,132 +3,130 @@
       <div v-for="skib in userInv" :key="skib.id">
         <div class="card">
           <h1>{{ skib.item }}</h1>
+          <h2>{{ skib.itemrarity }}</h2>
           <div class="buttons">
             <button @click="unbox(skib)">Unbox</button>
-            <button @click="openGui">Sell</button>
+            <button @click="openGui(skib)">Sell</button>
           </div>
-          <div v-if="showGui">
-            <h2>{{ skib }}</h2>
+          <div v-if="skib.showGui">
+            <h2>Item: {{ skib.item }}</h2>
+            <p>Type: {{ skib.itemType }}</p>
+            <p>Rarity: {{ skib.itemrarity }}</p>
+
+            <input placeholder="price (NUMBERS REQUIRED)" v-model="price"/>
             <button @click="sell(skib)">Sell to Market</button>
-            <input placeholder="skibidi" v-model="price"/>
-            <button @click="closeGui">Close GUI</button>
+            <button @click="closeGui(skib)">Close GUI</button>
           </div>
         </div>
       </div>
     </div>
   </template>
   
+  
   <script setup lang="ts">
-  import { supabase } from "@/lib/supabaseClient.js"
-  import { onMounted, ref } from 'vue'
-//   import ModelBox from "@/components/ModelBox.vue";
-  
-  interface InventoryItem {
-    id: number;
-    item: string;
-    possibleLoot: string[];
-    itemType: string;
-  }
-  
-  let userInv = ref<InventoryItem[]>([]);
-  
-  const boxesList = ref<Box[]>([
-    { id: 1, item: 'Common Crate', rarity: 'common' },
-    { id: 2, item: 'Uncommon Crate', rarity: 'uncommon' },
-  ]);
-  
-  interface Box {
-    id: number;
-    item: string;
-    rarity: 'common' | 'uncommon'; 
-  }
-  
-  const videoPaths: Record<'common' | 'uncommon', string> = {
-    common: './SkibUncommonAnimation.mkv',
-    uncommon: './Skib1.mkv',
+import { supabase } from "@/lib/supabaseClient.js"
+import { boxesList } from "@/stores/boxes";
+import { onMounted, ref } from 'vue'
+
+interface InventoryItem {
+  id: number;
+  item: string;
+  possibleLoot: string[];
+  itemType: string;
+  itemrarity: string;
+  rarity: string;
+  showGui?: boolean;  
+}
+
+let userInv = ref<InventoryItem[]>([]);
+
+interface Box {
+  id: Number;
+  item: String;
+  rarity: 'common' | 'uncommon';
+}
+
+const videoPaths: Record<'common' | 'uncommon', String> = {
+  common: './SkibUncommonAnimation.mkv',
+  uncommon: './Skib1.mkv',
+};
+
+function playVideo(videoPath: String) {
+  const videoElement = document.createElement('video');
+  videoElement.src = videoPath;
+  videoElement.autoplay = true;
+  videoElement.style.position = 'fixed';
+  videoElement.style.top = '50%';
+  videoElement.style.left = '50%';
+  videoElement.style.transform = 'translate(-50%, -50%)';
+  videoElement.style.zIndex = '1000';
+  videoElement.onended = () => {
+    document.body.removeChild(videoElement);
   };
-  
-  function playVideo(videoPath: string) {
-    const videoElement = document.createElement('video');
-    videoElement.src = videoPath;
-    videoElement.autoplay = true;
-    videoElement.style.position = 'fixed';
-    videoElement.style.top = '50%';
-    videoElement.style.left = '50%';
-    videoElement.style.transform = 'translate(-50%, -50%)';
-    videoElement.style.zIndex = '1000';
-    videoElement.onended = () => {
-      document.body.removeChild(videoElement);
-    };
-    document.body.appendChild(videoElement);
-  }
-  
-  let showGui = ref(false);
-  let userID = ref(null);
-  let price = ref('');
-  
-  async function callUserData() {
-    const userData = await supabase.auth.getUser();
-    const { data: oldSigmaData } = await supabase.from('userdata').select().eq('uuid', userData.data.user.id);
-    userID.value = userData.data.user.id;
-    userInv.value = oldSigmaData[0].inventory;
-  }
-  callUserData();
-  
-  async function unbox(item: InventoryItem) {
-    const box = boxesList.value.find(b => b.item === item.item);
-    if (box) {
-    }
-    playVideo(videoPaths[box.rarity]);
-    if (item.itemType === 'crate') {
-      const randomIndex = Math.floor(Math.random() * item.possibleLoot.length);
-      const newItem = item.possibleLoot[randomIndex];
-      const updatedInventory = userInv.value.filter(invItem => invItem !== item);
-      userInv.value = updatedInventory;
-      userInv.value.push({
-        id: new Date().getTime(),
-        item: newItem,
-        possibleLoot: [],
-        itemType: 'item'
-      });
-      
-       
+  document.body.appendChild(videoElement);
+}
 
+let userID = ref(null);
+let price = ref('');
 
-      await supabase
-        .from('userdata')
-        .update({ inventory: userInv.value })
-        .eq('uuid', userID.value);
-    } else {
-      console.log(item);
-    }
+async function callUserData() {
+  const userData = await supabase.auth.getUser();
+  const { data: oldSigmaData } = await supabase.from('userdata').select().eq('uuid', userData.data.user.id);
+  userID.value = userData.data.user.id;
+  userInv.value = oldSigmaData[0].inventory.map((item: InventoryItem) => ({
+    ...item,
+    showGui: false  
+  }));
+}
+callUserData();
+
+async function unbox(item: InventoryItem) {
+  const box = boxesList.value.find(b => b.item === item.item);
+  console.log(box);
+  if (box) {
   }
-  
-  async function sell(item: InventoryItem) {
+  playVideo(videoPaths[box.rarity]);
+  if (item.itemType === 'crate') {
+    const randomIndex = Math.floor(Math.random() * item.possibleLoot.length);
+    const newItem = item.possibleLoot[randomIndex];
     const updatedInventory = userInv.value.filter(invItem => invItem !== item);
-    const userData = await supabase.auth.getUser();
+    userInv.value = updatedInventory;
+    userInv.value.push(newItem);
+
     await supabase
       .from('userdata')
-      .update({ inventory: updatedInventory })
+      .update({ inventory: userInv.value })
       .eq('uuid', userID.value);
-  
-    const { error } = await supabase
-      .from('usermarket')
-      .insert({ item: item.item, itemType: item.itemType, sellPrice: price.value, soldBy: userData.data.user.email });
-  
-    userInv.value = updatedInventory;
-    showGui.value = false;
+  } else {
+    console.log(item);
   }
-  
-  function closeGui() {
-    showGui.value = false;
-  }
-  
-  function openGui() {
-    showGui.value = true;
-  }
-  
-  </script>
+}
+
+async function sell(item: InventoryItem) {
+  const updatedInventory = userInv.value.filter(invItem => invItem !== item);
+  const userData = await supabase.auth.getUser();
+  await supabase
+    .from('userdata')
+    .update({ inventory: updatedInventory })
+    .eq('uuid', userID.value);
+
+  const { error } = await supabase
+    .from('usermarket')
+    .insert({ item: item.item, itemType: item.itemType, sellPrice: price.value, soldBy: userData.data.user.email });
+
+  userInv.value = updatedInventory;
+  item.showGui = false;
+}
+
+function closeGui(item: InventoryItem) {
+  item.showGui = false;
+}
+
+function openGui(item: InventoryItem) {
+  item.showGui = true;
+}
+</script>
+
   
   <style scoped>
   .fortnite {
