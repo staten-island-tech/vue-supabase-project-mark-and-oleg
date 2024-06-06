@@ -6,18 +6,16 @@
       <div class="model-container">
         <ModelBox v-if="box.rarity === 'common'" :box="box" :rarity="box.rarity" class="common-model" />
         <ModelBox v-if="box.rarity === 'uncommon'" :box="box" :rarity="box.rarity" class="uncommon-model" />
+        <ModelBox v-if="box.rarity === 'epic'" :box="box" :rarity="box.rarity" class="epic-model" />
       </div>
       <button @click="buyBox(box)">Buy Box</button>
     </div>
   </div>
   <div class="mart">
     <h1>USER MARKETPLACE</h1>
-    <h2>total current value of market: {{ totalmarketvalue }}</h2>
-    <div class="gyatt">
-      <div class="usermarket" v-for="item in usermarket" :key="item.id">
-        {{ item }}
-        <button @click="buyOffMarket(item)" class="munt">throgg</button>
-      </div>
+    <div class="usermarket" v-for="item in countries" :key="item.id">
+      {{ item }}
+      <button @click="" class="munt">throgg</button>
     </div>
 =======
   <div class="container">
@@ -44,41 +42,16 @@ import ModelBox from "@/components/ModelBox.vue";
 interface Box {
   id: number;
   item: string;
-  rarity: 'common' | 'uncommon'; 
-}
-let totalmarketvalue = ref(0)
-let usermarket = ref()
-
-async function rizz() {
-  totalmarketvalue.value = 0
-  const { data } = await supabase.from('usermarket').select();
-  data.forEach((val)=>{
-    totalmarketvalue.value = totalmarketvalue.value + val.sellPrice
-  }) 
-  usermarket.value = data;
+  rarity: 'common' | 'uncommon' | 'epic'; 
 }
 
-async function buyOffMarket(fard: Object){
-  let productId = fard.uuid
-  await supabase
-    .from('usermarket')
-    .delete()
-    .eq('uuid', productId)
-  const userData = await supabase.auth.getUser();
-  const { data: oldSigmaData } = await supabase.from('userdata').select().eq('uuid', userData.data.user.id);
-  let inventory = oldSigmaData[0].inventory;
-  inventory.push(fard)
-  await supabase
-    .from('userdata')
-    .update({ inventory })
-    .eq('uuid', userData.data.user.id)
-  rizz()
-}
-onMounted(() => {
-  rizz();
-});
 
-
+const boxesList = ref<Box[]>([
+  { id: 1, item: 'Common Crate', rarity: 'common' },
+  { id: 2, item: 'Uncommon Crate', rarity: 'uncommon' },
+  { id: 3, item: 'Epic Crate', rarity: 'epic' },
+ 
+]);
 
 
 
@@ -99,14 +72,8 @@ async function buyBox(box: Box) {
 <style scoped>
 .mart {
   margin-bottom: 5%;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
 }
-.gyatt{
-  display: flex;
-  flex-wrap: wrap;
-}
+
 .munt {
   height: 50px;
   width: 150px;
@@ -141,7 +108,7 @@ async function buyBox(box: Box) {
   align-items: center;
 }
 
-.common-model {
+.common-model, .uncommon-model, .epic-model {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -153,9 +120,6 @@ async function buyBox(box: Box) {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-=======
-  height: 250px;
->>>>>>> Stashed changes
 }
 
 button {
