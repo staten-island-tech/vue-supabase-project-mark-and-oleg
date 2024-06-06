@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div ref="container"></div>
+        <div ref="container" class="skibidi"></div>
     </div>
 </template>
 
@@ -81,6 +81,10 @@ const loadCrateModel = (rarity) => {
             const bbox = new THREE.Box3().setFromObject(model);
             const center = bbox.getCenter(new THREE.Vector3());
             model.position.sub(center);
+
+            const scaleFactor = 0.5;
+            model.scale.set(scaleFactor, scaleFactor, scaleFactor);
+
             scene.add(model);
         },
         function (xhr) {
@@ -120,9 +124,16 @@ watch(() => props.rarity, (newRarity) => {
 });
 </script>
 
+<<<<<<< Updated upstream
 <style lang="scss" scoped>
 
 
 
 
+=======
+<style scoped>
+.skibidi{
+    height: 500px;
+}
+>>>>>>> Stashed changes
 </style>
