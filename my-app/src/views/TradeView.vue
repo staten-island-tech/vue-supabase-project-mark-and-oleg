@@ -21,7 +21,9 @@ async function loadFriends(){
         .select('friends')
         .eq('uuid', userId)
     friendsList.value = data[0].friends
+
 }
+
 loadFriends()
 </script>
 
