@@ -138,6 +138,7 @@ function openGui(item: InventoryItem) {
 
 
 <style scoped>
+
 body {
   background-color: #111;
   font-family: 'Courier New', Courier, monospace;
