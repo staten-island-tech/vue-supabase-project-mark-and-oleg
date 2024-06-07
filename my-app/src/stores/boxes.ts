@@ -292,11 +292,11 @@ export const boxesList = ref([
                 imageLink: 'https://i.redd.it/11w5sdcgn0kb1.jpg'
             },
             {
-                item: 'TV Man',
+                item: 'TV Woman',
                 itemType: 'skibidi',
                 itemrarity: 'Legendary',
                 probability: .25,
-                imageLink: 'https://preview.redd.it/70f6ogbfb9hb1.jpg?auto=webp&s=3e63a06a64ba15efe6cad9999f8d8576d5358346'
+                imageLink: 'https://preview.redd.it/3zyg9craj2cb1.jpg?auto=webp&s=d1ace587668366ffa42631b787e571a3d92ef136'
             },
         ],
         itemType: 'crate'

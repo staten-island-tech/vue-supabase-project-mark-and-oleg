@@ -1,11 +1,11 @@
 <template>
-    <div class="fart">
+    <div class="fart" v-if="skib">
       <h1>{{ fard.alias }}</h1>
       Friends:
       <h2>{{ fard.friends }}</h2>
       Inventory:
       <h3>{{ fard.inventory }}</h3>
-      <button @click="sendFriendRequest(fard.uuid, rizzler.user.data.id)">send friend request</button>
+      <button @click="sendFriendRequest(fard.value.uuid, rizzler.data.user.id)">send friend request</button>
     </div>
   </template>
   
@@ -14,7 +14,7 @@
   import { supabase } from '@/lib/supabaseClient.js'
   import { useRoute } from 'vue-router';
   let rizzler
-
+  let skib = ref(false)
   const fard = ref({});
 
   async function tio(){
@@ -24,7 +24,6 @@
   const route = useRoute();
   async function sendFriendRequest(receiverId, senderId) {
     let currentFriends = await supabase.from('userdata').select().eq('uuid', senderId);
-    console.log(userId)
     const { data, error } = await supabase
         .from('friendrequests')
         .insert([{ senderId: senderId, receiverId: receiverId}]);
@@ -40,6 +39,7 @@
         .eq('alias', poopy)
     if(data.length > 0){
         fard.value = data[0]
+        skib.value = true
     }else{
         fard.value = 'no people found'
     }
@@ -47,6 +47,7 @@
   
   onMounted(async () => {
     await getURL();
+    console.log(fard.value.uuid)
   });
 
   </script>

@@ -35,18 +35,20 @@ onMounted(() => {
 <template>
   
   <div class="alert" v-if="sigma">
-    <div class="window">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Transparent_Background_Dromedary_Camel.png" class="fard"/>
-      <h2>the skib roads</h2>
-    </div>
-      <h2 class="sigma">Hello, {{ rizzler.data.user.user_metadata.alias }}</h2>
+    <h2 class="sigma">Hello, {{ rizzler.data.user.user_metadata.alias }}</h2>
   </div>
+  
   <div v-if="!sigma">
+    
     <button class="button-38"><RouterLink to="/">Sign Up</RouterLink></button>
 
     <button class="button-38"><RouterLink to="/signin">Log In</RouterLink></button>
   </div>
   <div class="wrapper" v-if="sigma">
+    <div class="window">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Transparent_Background_Dromedary_Camel.png" class="fard"/>
+      <h2>skib road</h2>
+    </div>
     <button class="button-38"><RouterLink to="/">Register</RouterLink></button>
     
     <button class="button-38"><RouterLink to="/market">Market</RouterLink></button>
@@ -56,7 +58,9 @@ onMounted(() => {
     <button class="button-38"><RouterLink to="/profile">Profile</RouterLink></button>
 
     <button class="button-38"><RouterLink to="/signin">Sign In</RouterLink></button>
+    
   </div>
+  
   <button class="button-38"><UserInbox/></button>
   
   <RouterView />
