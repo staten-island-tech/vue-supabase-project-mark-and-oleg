@@ -121,7 +121,7 @@ async function sell(item: InventoryItem) {
 
   const { error } = await supabase
     .from('usermarket')
-    .insert({ item: item.item, itemType: item.itemType, sellPrice: price.value, soldBy: userData.data.user.email });
+    .insert({ item: item.item, itemType: item.itemType, imageLink: item.imageLink, itemrarity: item.itemrarity, sellPrice: price.value, soldBy: userData.data.user.email });
 
   userInv.value = updatedInventory;
   item.showGui = false;

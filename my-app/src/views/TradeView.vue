@@ -42,7 +42,7 @@ async function loadFriends() {
   friendsList.value = data[0].friends;
 }
 
-function openGUI(friend) {
+function openGUI(friend: string) {
   selectedFriend.value = friend;
   showGui.value = true;
 }
