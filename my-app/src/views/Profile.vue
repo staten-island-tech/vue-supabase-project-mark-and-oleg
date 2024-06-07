@@ -3,6 +3,7 @@
     <div v-for="skib in userInv" :key="skib.id" class="card">
       <h1>{{ skib.item }}</h1>
       <h2>{{ skib.itemrarity }}</h2>
+      <img :src="skib.imageLink" class="munt"/>
       <div class="buttons">
         <button v-if="skib.itemType === 'crate'" @click="unbox(skib)">Unbox</button>
         <button @click="openGui(skib)">Sell</button>
@@ -38,6 +39,7 @@ interface InventoryItem {
   itemType: string;
   itemrarity: string;
   rarity: string;
+  imageLink: string;
   showGui?: boolean;
 }
 
@@ -92,18 +94,18 @@ async function unbox(item: InventoryItem) {
       const box = boxesList.value.find(b => b.item === item.item);
       if (box) playVideo(videoPaths[box.rarity]);
       
-  if (item.itemType === 'crate') {
-    const randomIndex = Math.floor(Math.random() * item.possibleLoot.length);
-    const newItem = item.possibleLoot[randomIndex];
-    const updatedInventory = userInv.value.filter(invItem => invItem !== item);
-    userInv.value = updatedInventory;
-    userInv.value.push(newItem);
+      if (item.itemType === 'crate') {
+        const randomIndex = Math.floor(Math.random() * item.possibleLoot.length);
+        const newItem = item.possibleLoot[randomIndex];
+        const updatedInventory = userInv.value.filter(invItem => invItem !== item);
+        userInv.value = updatedInventory;
+        userInv.value.push(newItem);
 
-    await supabase
-      .from('userdata')
-      .update({ inventory: userInv.value })
-      .eq('uuid', userID.value);
-      }
+        await supabase
+          .from('userdata')
+          .update({ inventory: userInv.value })
+          .eq('uuid', userID.value);
+          }
     } catch (error) {
       console.error('Error unboxing item:', error.message);
     }
@@ -135,7 +137,6 @@ function openGui(item: InventoryItem) {
 </script>
 
 
-<style scoped>
 <style scoped>
 body {
   background-color: #111;
