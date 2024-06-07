@@ -2,8 +2,9 @@
 import { RouterLink, RouterView } from 'vue-router'
 import UserInbox from '@/components/UserInbox.vue'
 import { supabase } from '@/lib/supabaseClient.js'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import Searchbar from '@/components/Searchbar.vue'
+import { userLog } from './stores/userlog'
 //import money from '@/stores/money.ts'
 
 
@@ -17,11 +18,16 @@ async function unc(){
         sigma.value = true
     }
     
-}
+}    
 
-onMounted(()=>{
-    unc()
-})
+const userStore = userLog();
+console.log(userStore)
+onMounted(() => {
+  unc()
+
+});
+
+
 
 
 </script>

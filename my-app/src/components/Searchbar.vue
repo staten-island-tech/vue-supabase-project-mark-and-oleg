@@ -56,6 +56,7 @@ template{
 .formfirst {
     position: relative;
     width: 25rem;
+    color: white;
     margin-left: 4%;
     background: var(--color-brand);
     border-radius: var(--rad);

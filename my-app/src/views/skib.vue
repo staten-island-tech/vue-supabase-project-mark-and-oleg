@@ -1,8 +1,10 @@
 <template>
-    <div>
+    <div class="fart">
       <h1>{{ fard.alias }}</h1>
       <h2>{{ fard.friends }}</h2>
+      Inventory:
       <h3>{{ fard.inventory }}</h3>
+      <button @click="">send friend request</button>
     </div>
   </template>
   
@@ -34,5 +36,7 @@
 
   </script>
   <style scoped>
-
+.fart{
+  color: white;
+}
 </style>
