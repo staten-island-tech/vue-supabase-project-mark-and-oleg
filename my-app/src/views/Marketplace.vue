@@ -69,19 +69,13 @@ onMounted(() => {
   rizz();
 });
 
-
-
-
 async function buyBox(box: Box) {
   const userData = await supabase.auth.getUser();
   const { data: oldSigmaData } = await supabase.from('userdata').select().eq('uuid', userData.data.user.id);
   let inventory = oldSigmaData[0].inventory;
   inventory.push(box);
   await supabase.from('userdata').update({ inventory }).eq('uuid', userData.data.user.id);
-  
 }
-
-
 
 </script>
 
@@ -111,7 +105,7 @@ async function buyBox(box: Box) {
   height: 550px;
   padding: 10px;
   margin: 10px;
-  background-color: black;
+  background-color: #141414;
   border: 1px solid #ccc;
   border-radius: 5px;
   justify-content: space-around;
@@ -132,8 +126,6 @@ async function buyBox(box: Box) {
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
-
 
 button {
   margin-top: 10px;
@@ -170,4 +162,7 @@ button:hover {
   background-color: black;
 }
 
+h1, h2, p, div, button {
+  color: white;
+}
 </style>

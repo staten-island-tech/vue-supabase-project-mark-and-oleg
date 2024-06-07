@@ -32,9 +32,9 @@ onMounted(()=>{
       <h2>Hello, {{ rizzler.data.user.user_metadata.alias }}</h2>
   </div>
   <div v-if="!sigma">
-    <button class="button-38"><RouterLink to="/">Home</RouterLink></button>
+    <button class="button-38"><RouterLink to="/">Sign Up</RouterLink></button>
 
-    <button class="button-38"><RouterLink to="/signin">Sign In</RouterLink></button>
+    <button class="button-38"><RouterLink to="/signin">Log In</RouterLink></button>
   </div>
   <div class="wrapper" v-if="sigma">
     <button class="button-38"><RouterLink to="/">Home</RouterLink></button>
@@ -56,8 +56,6 @@ onMounted(()=>{
 </template>
 
 <style scoped>
-
-
 .wrapper {
   display: flex;
   flex-wrap: wrap;
