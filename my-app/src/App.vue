@@ -37,7 +37,7 @@ onMounted(()=>{
     <button class="button-38"><RouterLink to="/signin">Log In</RouterLink></button>
   </div>
   <div class="wrapper" v-if="sigma">
-    <button class="button-38"><RouterLink to="/">Home</RouterLink></button>
+    <button class="button-38"><RouterLink to="/">Register</RouterLink></button>
     
     <button class="button-38"><RouterLink to="/market">Market</RouterLink></button>
 
