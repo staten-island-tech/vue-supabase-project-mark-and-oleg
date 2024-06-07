@@ -1,32 +1,31 @@
 <template>
-    <div class="fortnite">
-      <div v-for="skib in userInv" :key="skib.id">
-        <div class="card">
-          <h1>{{ skib.item }}</h1>
-          <h2>{{ skib.itemrarity }}</h2>
-          <div class="buttons">
-            <button @click="unbox(skib)">Unbox</button>
-            <button @click="openGui(skib)">Sell</button>
-          </div>
-          <div v-if="skib.showGui">
-            <h2>Item: {{ skib.item }}</h2>
-            <p>Type: {{ skib.itemType }}</p>
-            <p>Rarity: {{ skib.itemrarity }}</p>
-
-            <input placeholder="price (NUMBERS REQUIRED)" v-model="price"/>
-            <button @click="sell(skib)">Sell to Market</button>
-            <button @click="closeGui(skib)">Close GUI</button>
-          </div>
+  <div class="fortnite">
+    <div v-for="skib in userInv" :key="skib.id">
+      <div class="card">
+        <h1>{{ skib.item }}</h1>
+        <h2>{{ skib.itemrarity }}</h2>
+        <div class="buttons">
+          <button v-if="skib.itemType === 'crate'" @click="unbox(skib)">Unbox</button>
+          <button @click="openGui(skib)">Sell</button>
+        </div>
+        <div v-if="skib.showGui" class="gui">
+          <h2>Item: {{ skib.item }}</h2>
+          <p>Type: {{ skib.itemType }}</p>
+          <p>Rarity: {{ skib.itemrarity }}</p>
+          <input placeholder="price (NUMBERS REQUIRED)" v-model="price"/>
+          <button @click="sell(skib)">Sell to Market</button>
+          <button @click="closeGui(skib)">Close GUI</button>
         </div>
       </div>
     </div>
-  </template>
-  
-  
-  <script setup lang="ts">
-import { supabase } from "@/lib/supabaseClient.js"
+  </div>
+</template>
+
+
+<script setup lang="ts">
+import { supabase } from "@/lib/supabaseClient.js";
 import { boxesList } from "@/stores/boxes";
-import { onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue';
 
 interface InventoryItem {
   id: number;
@@ -35,24 +34,27 @@ interface InventoryItem {
   itemType: string;
   itemrarity: string;
   rarity: string;
-  showGui?: boolean;  
+  showGui?: boolean;
 }
 
 let userInv = ref<InventoryItem[]>([]);
 
 interface Box {
-  id: Number;
-  item: String;
-  rarity: 'common' | 'uncommon';
+  id: number;
+  item: string;
+  rarity: 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary' | 'exotic';
 }
 
-const videoPaths: Record<'common' | 'uncommon', String> = {
+const videoPaths: Record<'common' | 'uncommon' | 'rare' | 'epic' | 'legendary' | 'exotic', string> = {
   common: './SkibUncommonAnimation.mkv',
   uncommon: './Skib1.mkv',
+  rare: './SkibRareAnimation.mkv',
   epic: './SkibEpicAnimation.mkv',
+  legendary: './SkibLegAnimation.mkv',
+  exotic: './SkibExoticAnimation.mkv',
 };
 
-function playVideo(videoPath: String) {
+function playVideo(videoPath: string) {
   const videoElement = document.createElement('video');
   videoElement.src = videoPath;
   videoElement.autoplay = true;
@@ -76,30 +78,32 @@ async function callUserData() {
   userID.value = userData.data.user.id;
   userInv.value = oldSigmaData[0].inventory.map((item: InventoryItem) => ({
     ...item,
-    showGui: false  
+    showGui: false
   }));
 }
 callUserData();
 
 async function unbox(item: InventoryItem) {
   const box = boxesList.value.find(b => b.item === item.item);
-  console.log(box);
   if (box) {
-  }
-  playVideo(videoPaths[box.rarity]);
-  if (item.itemType === 'crate') {
-    const randomIndex = Math.floor(Math.random() * item.possibleLoot.length);
-    const newItem = item.possibleLoot[randomIndex];
-    const updatedInventory = userInv.value.filter(invItem => invItem !== item);
-    userInv.value = updatedInventory;
-    userInv.value.push(newItem);
+    playVideo(videoPaths[box.rarity]);
 
-    await supabase
-      .from('userdata')
-      .update({ inventory: userInv.value })
-      .eq('uuid', userID.value);
-  } else {
-    console.log(item);
+    if (item.itemType === 'crate') {
+      const randomIndex = Math.floor(Math.random() * item.possibleLoot.length);
+      const newItem = item.possibleLoot[randomIndex];
+      const updatedInventory = userInv.value.map(invItem => {
+        if (invItem === item) {
+          return { ...item, item: newItem, itemType: 'unboxed', itemrarity: box.rarity };
+        }
+        return invItem;
+      });
+      userInv.value = updatedInventory;
+
+      await supabase
+        .from('userdata')
+        .update({ inventory: userInv.value })
+        .eq('uuid', userID.value);
+    }
   }
 }
 
@@ -128,24 +132,79 @@ function openGui(item: InventoryItem) {
 }
 </script>
 
-  
-  <style scoped>
-  .fortnite {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-  .card {
-    display: flex;
-    flex-direction: column;
-    border: 4px solid black;
-    width: 250px;
-    align-items: center;
-    margin: 10px;
-  }
-  .buttons {
-    display: flex;
-    flex-direction: row;
-  }
-  </style>
-  
+
+<style scoped>
+<style scoped>
+body {
+  background-color: #111;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.fortnite {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+  background-image: url('/path/to/your/grunge-texture.jpg');
+  background-size: cover;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #444;
+  background-color: #222;
+  width: 250px;
+  padding: 20px;
+  margin: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+  color: #eee;
+}
+
+.card h1, .card h2, .card p {
+  margin: 0;
+}
+
+.card .buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.card button {
+  background-color: #444;
+  color: #eee;
+  border: 1px solid #666;
+  padding: 10px;
+  cursor: pointer;
+  flex: 1;
+  margin: 5px;
+}
+
+.card button:hover {
+  background-color: #555;
+}
+
+.card .gui {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.card .gui input {
+  background-color: #333;
+  color: #eee;
+  border: 1px solid #555;
+  padding: 5px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.card .gui button {
+  margin-top: 10px;
+}
+</style>
+

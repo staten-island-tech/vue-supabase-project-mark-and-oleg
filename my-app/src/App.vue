@@ -63,6 +63,7 @@ onMounted(()=>{
   flex-wrap: wrap;
   align-items: center;
 
+
 }
 
 .logo {
@@ -107,5 +108,7 @@ nav a:first-of-type {
     flex-wrap: wrap;
     justify-content: center;
   }
+
+
 
 </style>

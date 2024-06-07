@@ -5,18 +5,21 @@
       <div class="model-container">
         <ModelBox v-if="box.rarity === 'common'" :box="box" :rarity="box.rarity" class="common-model" />
         <ModelBox v-if="box.rarity === 'uncommon'" :box="box" :rarity="box.rarity" class="uncommon-model" />
+        <ModelBox v-if="box.rarity === 'rare'" :box="box" :rarity="box.rarity" class="rare-model" />
         <ModelBox v-if="box.rarity === 'epic'" :box="box" :rarity="box.rarity" class="epic-model" />
+        <ModelBox v-if="box.rarity === 'legendary'" :box="box" :rarity="box.rarity" class="leg-model" />
+        <ModelBox v-if="box.rarity === 'exotic'" :box="box" :rarity="box.rarity" class="exotic-model" />
       </div>
       <button @click="buyBox(box)">Buy Box</button>
     </div>
   </div>
   <div class="mart">
     <h1>USER MARKETPLACE</h1>
-    <h2>total current value of market: {{ totalmarketvalue }}</h2>
+    <h2>Total current value of market: {{ totalmarketvalue }}</h2>
     <div class="gyatt">
       <div class="usermarket" v-for="item in usermarket" :key="item.id">
         {{ item }}
-      <button @click="buyOffMarket(item)" class="munt">throgg</button>
+      <button @click="buyOffMarket(item)" class="munt">Clear</button>
     </div>
   </div>
   </div>
@@ -108,6 +111,7 @@ async function buyBox(box: Box) {
   height: 550px;
   padding: 10px;
   margin: 10px;
+  background-color: black;
   border: 1px solid #ccc;
   border-radius: 5px;
   justify-content: space-around;
@@ -122,7 +126,7 @@ async function buyBox(box: Box) {
   align-items: center;
 }
 
-.common-model, .uncommon-model, .epic-model {
+.common-model, .uncommon-model, .rare-model, .epic-model, .leg-model, .exotic-model {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -135,7 +139,7 @@ button {
   margin-top: 10px;
   cursor: pointer;
   padding: 8px 16px;
-  background-color: #007bff;
+  background-color: green;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -161,4 +165,9 @@ button:hover {
   flex-direction: column;
   width: 15%;
 }
+
+.body {
+  background-color: black;
+}
+
 </style>

@@ -14,14 +14,15 @@ a,
 }
 body{
     margin: 0 5% 0 5%;
+    background-color: black;
 }
 
 .button-38 {
-  background-color: #FFFFFF;
+  background-color: green;
   border: 0;
   border-radius: .5rem;
   box-sizing: border-box;
-  color: rgb(255, 0, 217);
+  color: lightgreen;
 
   font-size: .875rem;
   font-weight: 1000;
