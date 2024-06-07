@@ -33,8 +33,12 @@ onMounted(() => {
 </script>
 
 <template>
- 
+  
   <div class="alert" v-if="sigma">
+    <div class="window">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Transparent_Background_Dromedary_Camel.png" class="fard"/>
+      <h2>the skib roads</h2>
+    </div>
       <h2 class="sigma">Hello, {{ rizzler.data.user.user_metadata.alias }}</h2>
   </div>
   <div v-if="!sigma">
@@ -63,11 +67,18 @@ onMounted(() => {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-
-
 }
-
+.window{
+  display: flex;
+  align-items: center;
+  color: white;
+}
+.fard{
+  height: 150px;
+  width: 150px;
+}
 .sigma{
+  margin-top: 2.5%;
   color: white;
 }
 
