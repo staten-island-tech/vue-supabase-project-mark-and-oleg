@@ -8,46 +8,53 @@ export const boxesList = ref([
         value: 1,
         possibleLoot: [
             {
-                item: 'regular skibidi toilet',
+                item: 'Regular Skibidi Toilet',
                 itemType: 'skibidi',
                 itemrarity: 'common',
                 probability: .25,
+                imageLink: 'https://static.wikia.nocookie.net/skibitoilets/images/3/34/Skibidi_toilet.png/revision/latest?cb=20230615005152'
             },
             {
-                item: 'regular cameraman',
+                item: 'Regular Cameraman',
                 itemType: 'skibidi',
                 itemrarity: 'common',
-                probability: .25
+                probability: .25,
+                imageLink: 'https://i.pinimg.com/474x/3f/0a/77/3f0a775205c9d1399a3c870f472463b5.jpg'
             },
             {
-                item: 'regular big skibidi toilet',
+                item: 'Regular Big Skibidi Toilet',
                 itemType: 'skibidi',
                 itemrarity: 'common',
-                probability: .25
+                probability: .25,
+                imageLink: 'https://static.wikia.nocookie.net/skibidi-toilet-official/images/7/73/LargeST.png/revision/latest/scale-to-width/360?cb=20240304003934'
             },
             {
-                item: 'regular goon toilet',
+                item: 'Regular Goon Toilet',
                 itemType: 'skibidi',
                 itemrarity: 'common',
-                probability: .25
+                probability: .25,
+                imageLink: 'https://preview.redd.it/7mtf1q5uiwsc1.jpeg?width=640&crop=smart&auto=webp&s=175562ec85fbf97f10ada2ddbd3a6097eb73a19a'
             },
             {
-                item: 'regular sawblade skibidi toilet',
+                item: 'Regular Sawblade Skibidi Toilet',
                 itemType: 'skibidi',
                 itemrarity: 'common',
-                probability: .25
+                probability: .25,
+                imageLink: 'https://static.wikia.nocookie.net/dom-studios-skibidi-multiverse/images/4/44/DualBuzzsawKnives022.png/revision/latest?cb=20240128092115'
             },
             {
-                item: 'regular speakerman',
+                item: 'Regular Speakerman',
                 itemType: 'skibidi',
                 itemrarity: 'common',
-                probability: .25
+                probability: .25,
+                imageLink: 'https://static.wikia.nocookie.net/skibidi-toilet-official/images/9/9c/Skibidi_toilet_speakermanpng.png/revision/latest?cb=20230720114727'
             },
             {
-                item: 'regular tv man',
+                item: 'Regular TV Man',
                 itemType: 'skibidi',
                 itemrarity: 'common',
-                probability: .25
+                probability: .25,
+                imageLink: 'https://static.wikia.nocookie.net/skibidi-toilet-official/images/e/e3/Skibidi_toilet_39_Tv_Man_Screenshot_Hd_Enchanted.png/revision/latest/scale-to-width-down/1200?cb=20230617101724'
             },
         ],
         itemType: 'crate'
@@ -58,61 +65,62 @@ export const boxesList = ref([
         value: 2,
         possibleLoot: [
             {
-                item: 'flying skibidi toilet',
+                item: 'Flying Skibidi Toilet',
+                itemType: 'skibidi',
+                itemrarity: 'uncommon',
+                probability: .25,
+                imageLink: 'https://static.wikia.nocookie.net/skibidi-toilet-official/images/c/c9/5-GiantFlyingSkibidiToilet1.png/revision/latest?cb=20240218053956'
+            },
+            {
+                item: 'Police Skibidi Toilet',
                 itemType: 'skibidi',
                 itemrarity: 'uncommon',
                 probability: .25
             },
             {
-                item: 'police skibidi toilet',
+                item: 'Military Skibidi Toilet',
                 itemType: 'skibidi',
                 itemrarity: 'uncommon',
                 probability: .25
             },
             {
-                item: 'military skibidi toilet',
+                item: 'Spider Skibidi Toilet',
                 itemType: 'skibidi',
                 itemrarity: 'uncommon',
                 probability: .25
             },
             {
-                item: 'spider skibidi toilet',
+                item: 'Zombie Skibidi Toilet',
                 itemType: 'skibidi',
                 itemrarity: 'uncommon',
                 probability: .25
             },
             {
-                item: 'zombie skibidi toilet',
+                item: 'Spider Speakerman',
                 itemType: 'skibidi',
                 itemrarity: 'uncommon',
                 probability: .25
             },
             {
-                item: 'spider speakerman',
+                item: 'Recorder Cameraman',
                 itemType: 'skibidi',
                 itemrarity: 'uncommon',
                 probability: .25
             },
             {
-                item: 'recorder cameraman',
+                item: 'Giant Cameraman',
                 itemType: 'skibidi',
                 itemrarity: 'uncommon',
                 probability: .25
             },
             {
-                item: 'giant cameraman',
+                item: 'Spider Cameraman',
                 itemType: 'skibidi',
                 itemrarity: 'uncommon',
                 probability: .25
             },
             {
-                item: 'spider cameraman',
-                itemType: 'skibidi',
-                itemrarity: 'uncommon',
-                probability: .25
-            },
-            {
-                item: 'spy cameraman toilet',
+                item: 'Spy Cameraman Toilet',
                 itemType: 'skibidi',
                 itemrarity: 'uncommon',
                 probability: .25
@@ -126,43 +134,43 @@ export const boxesList = ref([
         value: 3,
         possibleLoot: [
             {
-                item: 'holy skibidi toilet',
+                item: 'Holy Skibidi Toilet',
                 itemType: 'skibidi',
                 itemrarity: 'rare',
                 probability: .25
             },
             {
-                item: 'hydra skibidi toilet',
+                item: 'Hydra Skibidi Toilet',
                 itemType: 'skibidi',
                 itemrarity: 'rare',
                 probability: .25
             },
             {
-                item: 'mafia skibidi toilet',
+                item: 'Mafia Skibidi Toilet',
                 itemType: 'skibidi',
                 itemrarity: 'rare',
                 probability: .25
             },
             {
-                item: 'lightning skibidi toilet',
+                item: 'Lightning Skibidi Toilet',
                 itemType: 'skibidi',
                 itemrarity: 'rare',
                 probability: .25
             },
             {
-                item: 'ninja skibidi toilet',
+                item: 'Ninja Skibidi Toilet',
                 itemType: 'skibidi',
                 itemrarity: 'rare',
                 probability: .25
             },
             {
-                item: 'giant speakerman',
+                item: 'Giant Speakerman',
                 itemType: 'skibidi',
                 itemrarity: 'rare',
                 probability: .25
             },
             {
-                item: 'giant cameraman',
+                item: 'Giant Cameraman',
                 itemType: 'skibidi',
                 itemrarity: 'rare',
                 probability: .25
@@ -176,43 +184,43 @@ export const boxesList = ref([
         value: 4,
         possibleLoot: [
             {
-                item: 'dj skibidi',
+                item: 'DJ Skibidi',
                 itemType: 'skibidi',
                 itemrarity: 'epic',
                 probability: .25
             },
             {
-                item: 'camoflauge skibidi toilet',
+                item: 'Camoflauge Skibidi Toilet',
                 itemType: 'skibidi',
                 itemrarity: 'epic',
                 probability: .25
             },
             {
-                item: 'doctor skibidi',
+                item: 'Doctor Skibidi',
                 itemType: 'skibidi',
                 itemrarity: 'epic',
                 probability: .25
             },
             {
-                item: 'big laser skibidi toilet',
+                item: 'Big Laser Skibidi Toilet',
                 itemType: 'skibidi',
                 itemrarity: 'epic',
                 probability: .25
             },
             {
-                item: 'quad launcher skibidi toilet',
+                item: 'Quad Launcher Skibidi Toilet',
                 itemType: 'skibidi',
                 itemrarity: 'epic',
                 probability: .25
             },
             {
-                item: 'epic beats speakerwoman',
+                item: 'Epic Beats Speakerwoman',
                 itemType: 'skibidi',
                 itemrarity: 'epic',
                 probability: .25
             },
             {
-                item: 'commander cameraman',
+                item: 'Commander Cameraman',
                 itemType: 'skibidi',
                 itemrarity: 'epic',
                 probability: .25
@@ -226,37 +234,37 @@ export const boxesList = ref([
         value: 5,
         possibleLoot: [
             {
-                item: 'the scientist',
+                item: 'The Scientist',
                 itemType: 'skibidi',
                 itemrarity: 'legendary',
                 probability: .25
             },
             {
-                item: 'detainer astro toilet',
+                item: 'Detainer Astro Toilet',
                 itemType: 'skibidi',
                 itemrarity: 'legendary',
                 probability: .25
             },
             {
-                item: 'juggernaut astro toilet',
+                item: 'Juggernaut Astro Toilet',
                 itemType: 'skibidi',
                 itemrarity: 'legendary',
                 probability: .25
             },
             {
-                item: 'advisor astro toilet',
+                item: 'Advisor Astro Toilet',
                 itemType: 'skibidi',
                 itemrarity: 'c',
                 probability: .25
             },
             {
-                item: 'cinemaman',
+                item: 'Cinemaman',
                 itemType: 'skibidi',
                 itemrarity: 'c',
                 probability: .25
             },
             {
-                item: 'tv man',
+                item: 'TV Man',
                 itemType: 'skibidi',
                 itemrarity: 'c',
                 probability: .25
@@ -270,25 +278,25 @@ export const boxesList = ref([
         value: 6,
         possibleLoot: [
             {
-                item: 'final boss skibidi toilet',
+                item: 'Final Boss Skibidi Toilet',
                 itemType: 'skibidi',
                 itemrarity: 'c',
                 probability: .25
             },
             {
-                item: 'titan speakerman',
+                item: 'Titan Speakerman',
                 itemType: 'skibidi',
                 itemrarity: 'c',
                 probability: .25
             },
             {
-                item: 'titan cameraman',
+                item: 'Titan Cameraman',
                 itemType: 'skibidi',
                 itemrarity: 'c',
                 probability: .25
             },
             {
-                item: 'titan tv man',
+                item: 'Titan TV Man',
                 itemType: 'skibidi',
                 itemrarity: 'c',
                 probability: .25

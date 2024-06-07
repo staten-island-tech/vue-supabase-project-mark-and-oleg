@@ -40,10 +40,10 @@ async function signOutCurrentUser() {
 
   <div class="about">
     <form class="positionForm">
-      <label id="hi" for="hi">username</label>
+      <label id="hi" for="hi">Email</label>
       <input v-model="username" required/>
-      <label id="hi" for="hello">password</label>
-      <input v-model="password" required/>
+      <label id="hi" for="hello">Password</label>
+      <input v-model="password" type="password" required/>
       <input id="hi" type="submit" value="submit" @click.prevent="signInWithEmail">
       <input id="hi" type="submit" value="sign out" @click.prevent="signOutCurrentUser">
       <input id="hi" type="submit" value="get user skibidi data" @click.prevent="getUserData">

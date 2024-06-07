@@ -1,5 +1,5 @@
 <template>
-    <button @click="openGui">rizz</button>
+    <button @click="openGui">Inbox</button>
 
     <div v-if="GUI" v-for="request in friendReqs" class="sploingus">
         <h1 v-if="!loaded"> loading...</h1>
@@ -23,7 +23,7 @@ async function callFriendRequests(){
         console.log('felch', )
         friendReqs.value = data
     }else{
-        friendReqs.value = ['no friend requests (fucking loser)']
+        friendReqs.value = ['No Friend Requests']
         console.log('felch')
     }
 
