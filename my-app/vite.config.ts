@@ -8,7 +8,7 @@ import VueDevTools from 'vite-plugin-vue-devtools'
 export default defineConfig({
   build: {
     rollupOptions: {
-      external: ['three']
+      external: ['three/examples/jsm/loaders/GLTFLoader.js']
     }
   },
   plugins: [

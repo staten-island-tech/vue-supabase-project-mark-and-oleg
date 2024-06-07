@@ -232,7 +232,7 @@ export const boxesList = ref([
                 itemType: 'skibidi',
                 itemrarity: 'Epic',
                 probability: .25,
-                imageLink: 'https://preview.redd.it/are-flying-quad-launcher-skibidi-toilet-and-decoy-gman-are-v0-xsttiroga45c1.png?width=640&crop=smart&auto=webp&s=625ed1d68ac00a1a461474f7bd50c2c4510b3364'
+                imageLink: 'https://preview.redd.it/1ee5khdewdec1.jpeg?auto=webp&s=9f862121a3d98aaf5ba53cfcdf415e6113a09a0b'
             },
             {
                 item: 'Epic Beats Speakerwoman',
@@ -311,7 +311,7 @@ export const boxesList = ref([
                 itemType: 'skibidi',
                 itemrarity: 'exotic',
                 probability: .25,
-                imageLink: 'https://preview.redd.it/top-comment-gets-to-upgrade-this-final-boss-skibidi-toilet-v0-xz3bulrtjtkc1.png?width=1080&crop=smart&auto=webp&s=7178e7db05842878016782a31c288a09aa8f1db4'
+                imageLink: 'https://preview.redd.it/so-why-decoy-gman-toilet-is-fearless-also-why-upgraded-gman-v0-7q9psu4d4nac1.png?width=438&format=png&auto=webp&s=beb166961b5dc76a5b33fcb5f649e4746cc8aee8'
             },
             {
                 item: 'Titan Speakerman',
