@@ -29,7 +29,7 @@ onMounted(()=>{
 <template>
  
   <div class="alert" v-if="sigma">
-      <h2>Hello, {{ rizzler.data.user.user_metadata.alias }}</h2>
+      <h2 class="sigma">Hello, {{ rizzler.data.user.user_metadata.alias }}</h2>
   </div>
   <div v-if="!sigma">
     <button class="button-38"><RouterLink to="/">Sign Up</RouterLink></button>
@@ -62,6 +62,10 @@ onMounted(()=>{
   align-items: center;
 
 
+}
+
+.sigma{
+  color: white;
 }
 
 .logo {
