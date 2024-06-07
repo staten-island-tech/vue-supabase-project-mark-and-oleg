@@ -105,7 +105,7 @@ async function buyBox(box: Box) {
   height: 550px;
   padding: 10px;
   margin: 10px;
-  background-color: #141414;
+  background-color: #636363;
   border: 1px solid #ccc;
   border-radius: 5px;
   justify-content: space-around;
