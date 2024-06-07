@@ -12,7 +12,7 @@ export const boxesList = ref([
                 itemType: 'skibidi',
                 itemrarity: 'common',
                 probability: .25,
-                imageLink: 'https://static.wikia.nocookie.net/skibitoilets/images/3/34/Skibidi_toilet.png/revision/latest?cb=20230615005152'
+                imageLink: 'https://i.redd.it/this-may-be-controversial-but-personally-i-really-dont-v0-37slovr1r08b1.jpg?width=1280&format=pjpg&auto=webp&s=87bfe4cdaa37c614a2a9dd2ad318bd3fcfc9aa0e'
             },
             {
                 item: 'Regular Cameraman',
@@ -26,7 +26,7 @@ export const boxesList = ref([
                 itemType: 'skibidi',
                 itemrarity: 'common',
                 probability: .25,
-                imageLink: 'https://static.wikia.nocookie.net/skibidi-toilet-official/images/7/73/LargeST.png/revision/latest/scale-to-width/360?cb=20240304003934'
+                imageLink: 'https://m.media-amazon.com/images/M/MV5BMzUwZDdjN2UtZDk3NS00M2IwLTgwNDMtYzQzMmVhZjE3MjJlXkEyXkFqcGdeQXVyOTQ4MDEzMTg@._V1_QL75_UX500_CR0,116,500,281_.jpg'
             },
             {
                 item: 'Regular Goon Toilet',
@@ -69,42 +69,42 @@ export const boxesList = ref([
                 itemType: 'skibidi',
                 itemrarity: 'uncommon',
                 probability: .25,
-                imageLink: 'https://static.wikia.nocookie.net/skibidi-toilet-official/images/c/c9/5-GiantFlyingSkibidiToilet1.png/revision/latest?cb=20240218053956'
+                imageLink: 'https://i.redd.it/who-you-all-betting-on-as-having-been-astro-toilets-v0-fw6kdn6fge1d1.png?width=250&format=png&auto=webp&s=41e5707cf2fb509c87ccb59c751dcf36ed37fa5a'
             },
             {
                 item: 'Police Skibidi Toilet',
                 itemType: 'skibidi',
                 itemrarity: 'uncommon',
                 probability: .25,
-                imageLink: 'https://static.wikia.nocookie.net/skibidi-toilet-official/images/9/9e/Newimgmediumpolice.png/revision/latest/scale-to-width-down/1200?cb=20231112052744'
+                imageLink: 'https://preview.redd.it/kyoaubfzetsb1.png?auto=webp&s=f3bd214e8dbde931cadd91798875c258310a4fb6'
             },
             {
                 item: 'Military Skibidi Toilet',
                 itemType: 'skibidi',
                 itemrarity: 'uncommon',
                 probability: .25,
-                imageLink: 'https://media.sketchfab.com/models/55d48703e9424b03a90ba43eafe055d2/thumbnails/213540d40bc14197be337c644879c96c/3ab630f5f7a4406b88704f3423cc6899.jpeg'
+                imageLink: 'https://preview.redd.it/who-would-win-v0-zlulxqygouwb1.jpg?width=380&format=pjpg&auto=webp&s=18f0698179210a1afbf9cf6d140fac359a8d412d'
             },
             {
                 item: 'Spider Skibidi Toilet',
                 itemType: 'skibidi',
                 itemrarity: 'uncommon',
                 probability: .25,
-                imageLink: 'https://static.wikia.nocookie.net/skibidi-toilet-official/images/e/e0/StriderSkibidi.png/revision/latest/scale-to-width-down/1200?cb=20240202025626'
+                imageLink: 'https://i.redd.it/how-many-camera-toilets-will-it-take-to-beat-spider-skibidi-v0-cjhz97encosb1.jpg?width=368&format=pjpg&auto=webp&s=0578962e493aa8dde4780879f948a7699dd704f5'
             },
             {
                 item: 'Zombie Skibidi Toilet',
                 itemType: 'skibidi',
                 itemrarity: 'uncommon',
                 probability: .25,
-                imageLink: 'https://static.wikia.nocookie.net/skibidi-toilet-zombie-universe/images/f/f0/2024-03-03_18-22-50-666.png/revision/latest?cb=20240303114617'
+                imageLink: 'https://preview.redd.it/66utz4121mrc1.png?auto=webp&s=04665d43556f8a9fb73baceac095737b208cd683'
             },
             {
                 item: 'Spider Speakerman',
                 itemType: 'skibidi',
                 itemrarity: 'uncommon',
                 probability: .25,
-                imageLink: 'https://static.wikia.nocookie.net/skibidi-toilet-official/images/3/30/Better_SpeakerStrider.png/revision/latest/scale-to-width-down/1200?cb=20230721105829'
+                imageLink: 'https://preview.redd.it/favorite-speakerman-v0-z8ukbj467gjb1.png?width=2281&format=png&auto=webp&s=fed0a0c9f23cc62661e871741a4b307fd120b05e'
             },
             {
                 item: 'Recorder Cameraman',
@@ -118,21 +118,21 @@ export const boxesList = ref([
                 itemType: 'skibidi',
                 itemrarity: 'uncommon',
                 probability: .25,
-                imageLink: 'https://static.wikia.nocookie.net/skibidi-toilet-official/images/6/6c/34-LargeRedSuitedCameramanTransparent.png/revision/latest?cb=20230930193614'
+                imageLink: 'https://preview.redd.it/4phcpa4f336c1.png?auto=webp&s=e863e8b10e355b87ee3afe98c701f303e09ecf69'
             },
             {
                 item: 'Opium Spider Cameraman',
                 itemType: 'skibidi',
                 itemrarity: 'uncommon',
                 probability: .25,
-                imageLink: 'https://static.wikia.nocookie.net/skibidi-toilet-official/images/0/0b/32-BetterCameraStrider.png/revision/latest/scale-to-width-down/1200?cb=20230721105826'
+                imageLink: 'https://ae01.alicdn.com/kf/Sb23e868de5d5458e853f1a915249287ba/Skibidi-Toilet-Cameraman-Battle-Pack-Monsters-Building-Blocks-220-Pieces-DIY-Movie-Role-Model-Toys-Set.jpg'
             },
             {
                 item: 'Spy Cameraman Toilet',
                 itemType: 'skibidi',
                 itemrarity: 'uncommon',
                 probability: .25,
-                imageLink: 'https://static.wikia.nocookie.net/skibidi-toilet-official/images/3/3b/Better_CameraToilet.png/revision/latest?cb=20230721105830'
+                imageLink: 'https://preview.redd.it/give-me-fake-lore-for-these-camera-toilet-forms-best-one-in-v0-9ambbds4x2qb1.jpg?width=537&format=pjpg&auto=webp&s=e4e785c3da969785ad2a9593c39efcf778fe1fe2'
             },
         ],
         itemType: 'crate'
@@ -147,43 +147,49 @@ export const boxesList = ref([
                 itemType: 'skibidi',
                 itemrarity: 'rare',
                 probability: .25,
-                imageLink: 'https://static.wikia.nocookie.net/skibidi-toilet-official/images/b/bb/10-SaintSkbidi.png/revision/latest?cb=20240312053622'
+                imageLink: 'https://preview.redd.it/if-any-of-these-toilets-were-to-return-as-like-being-v0-vtt7df82uirb1.png?width=640&crop=smart&auto=webp&s=e0254450e3b7d5cef2251ff856ad6de23e0aae39'
             },
             {
                 item: 'Hydra Skibidi Toilet',
                 itemType: 'skibidi',
                 itemrarity: 'rare',
-                probability: .25
+                probability: .25,
+                imageLink: 'https://preview.redd.it/wr59jjnxufib1.png?auto=webp&s=b5baae827cde48f5b0c78b2d02962c0c95539102'
             },
             {
                 item: 'Mafia Skibidi Toilet',
                 itemType: 'skibidi',
                 itemrarity: 'rare',
-                probability: .25
+                probability: .25,
+                imageLink: 'https://i.redd.it/if-any-of-these-toilets-were-to-return-as-like-being-v0-yo532l13uirb1.png?width=1000&format=png&auto=webp&s=4090e457868472e819ff120793be29b80156bd95'
             },
             {
                 item: 'Lightning Skibidi Toilet',
                 itemType: 'skibidi',
                 itemrarity: 'rare',
-                probability: .25
+                probability: .25,
+                imageLink: 'https://preview.redd.it/yall-think-trav-knows-about-skibidi-toilet-v0-3ktlq3eh843d1.jpeg?auto=webp&s=c54dc7ecaa0f2d5893fcc8ec1820a1e90c5153c9'
             },
             {
                 item: 'Ninja Skibidi Toilet',
                 itemType: 'skibidi',
                 itemrarity: 'rare',
-                probability: .25
+                probability: .25,
+                imageLink: 'https://i.redd.it/yydh1kv1dlbb1.jpg'
             },
             {
                 item: 'Giant Speakerman',
                 itemType: 'skibidi',
                 itemrarity: 'rare',
-                probability: .25
+                probability: .25,
+                imageLink: 'https://i.redd.it/qj7rj2fecxeb1.jpg'
             },
             {
                 item: 'Giant Cameraman',
                 itemType: 'skibidi',
                 itemrarity: 'rare',
-                probability: .25
+                probability: .25,
+                imageLink: 'https://preview.redd.it/4phcpa4f336c1.png?auto=webp&s=e863e8b10e355b87ee3afe98c701f303e09ecf69'
             },
         ],
         itemType: 'crate'
