@@ -1,25 +1,29 @@
 <template>
   <div class="fortnite">
-    <div v-for="skib in userInv" :key="skib.id">
-      <div class="card">
-        <h1>{{ skib.item }}</h1>
-        <h2>{{ skib.itemrarity }}</h2>
-        <div class="buttons">
-          <button v-if="skib.itemType === 'crate'" @click="unbox(skib)">Unbox</button>
-          <button @click="openGui(skib)">Sell</button>
-        </div>
-        <div v-if="skib.showGui" class="gui">
-          <h2>Item: {{ skib.item }}</h2>
-          <p>Type: {{ skib.itemType }}</p>
-          <p>Rarity: {{ skib.itemrarity }}</p>
-          <input placeholder="price (NUMBERS REQUIRED)" v-model="price"/>
-          <button @click="sell(skib)">Sell to Market</button>
-          <button @click="closeGui(skib)">Close GUI</button>
-        </div>
+    <div v-for="skib in userInv" :key="skib.id" class="card">
+      <h1>{{ skib.item }}</h1>
+      <h2>{{ skib.itemrarity }}</h2>
+      <div class="buttons">
+        <button v-if="skib.itemType === 'crate'" @click="unbox(skib)">Unbox</button>
+        <button @click="openGui(skib)">Sell</button>
+      </div>
+      <div v-if="skib.showGui" class="gui">
+        <h2>Item: {{ skib.item }}</h2>
+        <p>Type: {{ skib.itemType }}</p>
+        <p>Rarity: {{ skib.itemrarity }}</p>
+        <input placeholder="price (NUMBERS REQUIRED)" v-model="price" />
+        <button @click="sell(skib)">Sell to Market</button>
+        <button @click="closeGui(skib)">Close GUI</button>
+      </div>
+      <div v-if="skib.showUnboxGui" class="unbox-gui">
+        <h2>Congratulations! You unboxed:</h2>
+        <h3>{{ skib.item }}</h3>
+        <button @click="closeUnboxGui(skib)">Close</button>
       </div>
     </div>
   </div>
 </template>
+
 
 
 <script setup lang="ts">
@@ -84,28 +88,26 @@ async function callUserData() {
 callUserData();
 
 async function unbox(item: InventoryItem) {
-  const box = boxesList.value.find(b => b.item === item.item);
-  if (box) {
-    playVideo(videoPaths[box.rarity]);
+    try {
+      const box = boxesList.value.find(b => b.item === item.item);
+      if (box) playVideo(videoPaths[box.rarity]);
+      
+  if (item.itemType === 'crate') {
+    const randomIndex = Math.floor(Math.random() * item.possibleLoot.length);
+    const newItem = item.possibleLoot[randomIndex];
+    const updatedInventory = userInv.value.filter(invItem => invItem !== item);
+    userInv.value = updatedInventory;
+    userInv.value.push(newItem);
 
-    if (item.itemType === 'crate') {
-      const randomIndex = Math.floor(Math.random() * item.possibleLoot.length);
-      const newItem = item.possibleLoot[randomIndex];
-      const updatedInventory = userInv.value.map(invItem => {
-        if (invItem === item) {
-          return { ...item, item: newItem, itemType: 'unboxed', itemrarity: box.rarity };
-        }
-        return invItem;
-      });
-      userInv.value = updatedInventory;
-
-      await supabase
-        .from('userdata')
-        .update({ inventory: userInv.value })
-        .eq('uuid', userID.value);
+    await supabase
+      .from('userdata')
+      .update({ inventory: userInv.value })
+      .eq('uuid', userID.value);
+      }
+    } catch (error) {
+      console.error('Error unboxing item:', error.message);
     }
   }
-}
 
 async function sell(item: InventoryItem) {
   const updatedInventory = userInv.value.filter(invItem => invItem !== item);
