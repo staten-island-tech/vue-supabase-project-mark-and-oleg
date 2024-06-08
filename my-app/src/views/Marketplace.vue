@@ -1,6 +1,6 @@
 <template>
   <div class="skibidi">
-    <div class="card" v-for="box in boxesList" :key="box.id">
+    <div class="card" v-for="box in boxesList" :key="box.item">
       <h2>{{ box.item }}</h2>
       <div class="model-container">
         <ModelBox v-if="box.rarity === 'common'" :box="box" :rarity="box.rarity" class="common-model" />
@@ -18,78 +18,118 @@
     <h2>Total current value of market: {{ totalmarketvalue }}</h2>
     <div class="gyatt">
       <div class="usermarket" v-for="item in usermarket" :key="item.id">
-        {{ item }}
-      <button @click="buyOffMarket(item)" class="munt">Clear</button>
+        {{ item.item }} - {{ item.sellPrice }}
+        <button @click="buyOffMarket(item)" class="munt">Clear</button>
+      </div>
     </div>
-  </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { supabase } from '@/lib/supabaseClient.js';
-import { boxesList } from '@/stores/boxes.ts';
 import ModelBox from "@/components/ModelBox.vue";
+import { boxesList } from '@/stores/boxes.ts';
+
+interface Loot {
+  item: string;
+  itemType: string;
+  itemrarity: string;
+  probability: number;
+  imageLink: string;
+}
 
 interface Box {
-  id: number;
   item: string;
-  rarity: 'common' | 'uncommon' | 'epic'; 
+  rarity: 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary' | 'exotic';
+  value: number;
+  possibleLoot: Loot[];
+  itemType: string;
 }
 
-let totalmarketvalue = ref(0)
-let usermarket = ref()
+interface MarketItem {
+  id: number;
+  uuid: string;
+  item: string;
+  rarity: string;
+  sellPrice: number;
+}
+
+let totalmarketvalue = ref(0);
+let usermarket = ref<MarketItem[]>([]);
 
 async function rizz() {
-  totalmarketvalue.value = 0
+  totalmarketvalue.value = 0;
   const { data } = await supabase.from('usermarket').select();
-  data.forEach((val)=>{
-    totalmarketvalue.value = totalmarketvalue.value + val.sellPrice
-  }) 
-  usermarket.value = data;
+  if (data) {
+    data.forEach((val: MarketItem) => {
+      totalmarketvalue.value += val.sellPrice;
+    });
+    usermarket.value = data;
+  }
 }
 
-async function buyOffMarket(fard: Object){
-  let productId = fard.uuid
+async function buyOffMarket(fard: MarketItem) {
+  let productId = fard.uuid;
   await supabase
     .from('usermarket')
     .delete()
-    .eq('uuid', productId)
+    .eq('uuid', productId);
+  
   const userData = await supabase.auth.getUser();
-  const { data: oldSigmaData } = await supabase.from('userdata').select().eq('uuid', userData.data.user.id);
-  let inventory = oldSigmaData[0].inventory;
-  inventory.push(fard)
-  await supabase
-    .from('userdata')
-    .update({ inventory })
-    .eq('uuid', userData.data.user.id)
-  rizz()
+  if (userData.data?.user) {
+    const { data: oldSigmaData } = await supabase.from('userdata').select().eq('uuid', userData.data.user.id);
+    if (oldSigmaData && oldSigmaData.length > 0) {
+      let inventory = oldSigmaData[0].inventory;
+      inventory.push(fard);
+      await supabase
+        .from('userdata')
+        .update({ inventory })
+        .eq('uuid', userData.data.user.id);
+    }
+  }
+  rizz();
 }
+
 onMounted(() => {
   rizz();
 });
 
 async function buyBox(box: Box) {
   const userData = await supabase.auth.getUser();
-  const { data: oldSigmaData } = await supabase.from('userdata').select().eq('uuid', userData.data.user.id);
-  let inventory = oldSigmaData[0].inventory;
-  inventory.push(box);
-  await supabase.from('userdata').update({ inventory }).eq('uuid', userData.data.user.id);
+  if (userData.data?.user) {
+    const { data: oldSigmaData } = await supabase.from('userdata').select().eq('uuid', userData.data.user.id);
+    if (oldSigmaData && oldSigmaData.length > 0) {
+      let inventory = oldSigmaData[0].inventory;
+      inventory.push(box);
+      await supabase.from('userdata').update({ inventory }).eq('uuid', userData.data.user.id);
+    }
+  }
 }
+
+
 
 </script>
 
 <style scoped>
+body {
+  background-color: #141414;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
 .mart {
   margin-bottom: 5%;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
 }
-.gyatt{
+
+.gyatt {
   display: flex;
   flex-wrap: wrap;
 }
+
 .munt {
   height: 50px;
   width: 150px;
@@ -120,7 +160,12 @@ async function buyBox(box: Box) {
   align-items: center;
 }
 
-.common-model, .uncommon-model, .rare-model, .epic-model, .leg-model, .exotic-model {
+.common-model,
+.uncommon-model,
+.rare-model,
+.epic-model,
+.leg-model,
+.exotic-model {
   position: absolute;
   top: 50%;
   left: 50%;
