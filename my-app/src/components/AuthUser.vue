@@ -24,14 +24,22 @@ async function handleLogin() {
       },
     });
 
-    await supabase
-      .from('userdata')
-      .insert({ uuid: userData.data.user.id, created_at: userData.data.user.created_at, inventory: [], username: email.value, password: password.value, friends: [], alias: username.value, money: 1000 })
-    location.reload(); 
-    console.log('User signed up successfully:', userData.data.user.id);
+    if (userData && userData.data && userData.data.user) {
+      await supabase
+        .from('userdata')
+        .insert({ uuid: userData.data.user.id, created_at: userData.data.user.created_at, inventory: [], username: email.value, password: password.value, friends: [], alias: username.value, money: 1000 })
+      location.reload(); 
+      console.log('User signed up successfully:', userData.data.user.id);
+    } else {
+      console.error('User data is null or invalid.');
+    }
 
   } catch (error) {
-    console.error('Sign-up error:', error.message);
+    if (error instanceof Error) {
+      console.error('Sign-up error:', error.message);
+    } else {
+      console.error('Sign-up error:', error);
+    }
   }
 }
 </script>

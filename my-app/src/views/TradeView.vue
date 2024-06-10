@@ -2,9 +2,9 @@
   <div>
     <h1>SEND TRADE REQUESTS</h1>
     <h2>Friends: </h2>
-    <div v-for="felch in friendsList" :key="felch.id">
-      <h2>{{ felch }}</h2>
-      <button @click="openGUI(felch)">Open Trade Menu</button>
+    <div v-for="(friend, index) in friendsList" :key="index">
+      <h2>{{ friend }}</h2>
+      <button @click="openGUI(friend)">Open Trade Menu</button>
     </div>
   </div>
   
@@ -27,19 +27,26 @@
 import { supabase } from '@/lib/supabaseClient.js'
 import { ref } from 'vue'
 
-let friendsList = ref([]);
-let showGui = ref(false);
-let selectedFriend = ref('');
+const friendsList = ref<string[]>([]);
+const showGui = ref(false);
+const selectedFriend = ref('');
 
 async function loadFriends() {
   const userData = await supabase.auth.getUser();
-  let userId = userData.data.user.id;
-  const { data } = await supabase
-    .from('userdata')
-    .select('friends')
-    .eq('uuid', userId);
+  const userId = userData?.data?.user?.id;
 
-  friendsList.value = data[0].friends;
+  if (userId) {
+    const { data, error } = await supabase
+      .from('userdata')
+      .select('friends')
+      .eq('uuid', userId);
+
+    if (error) {
+      console.error('Error fetching friends:', error.message);
+    } else {
+      friendsList.value = data?.[0]?.friends || [];
+    }
+  }
 }
 
 function openGUI(friend: string) {

@@ -2,40 +2,31 @@
 import { RouterLink, RouterView } from 'vue-router'
 import UserInbox from '@/components/UserInbox.vue'
 import { supabase } from '@/lib/supabaseClient.js'
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted } from 'vue'
 import Searchbar from '@/components/Searchbar.vue'
-import { userLog } from './stores/userlog'
-//import money from '@/stores/money.ts'
-
-
+import type { User } from '@supabase/supabase-js'
 
 let sigma = ref(false)
-let rizzler
-async function unc(){
-  rizzler = await supabase.auth.getUser()
-    console.log(rizzler)
-    if(rizzler.error === null){
-        sigma.value = true
-    }
-    
+let rizzler: User | null = null;
+
+async function unc() {
+  const userData = await supabase.auth.getUser();
+  if (userData && userData.error === null) {
+    sigma.value = true;
+    rizzler = userData.data.user;
+  }
 }    
 
-const userStore = userLog();
-console.log(userStore)
 onMounted(() => {
-  unc()
-
+  unc();
 });
-
-
-
-
 </script>
+
 
 <template>
   
-  <div class="alert" v-if="sigma">
-    <h2 class="sigma">Hello, {{ rizzler.data.user.user_metadata.alias }}</h2>
+  <div class="alert" v-if="sigma && rizzler">
+  <h2 class="sigma">Hello, {{ rizzler.user_metadata.alias }}</h2>
   </div>
   
   <div v-if="!sigma">

@@ -4,16 +4,20 @@ import { supabase } from '@/lib/supabaseClient.js'
 import { ref, onMounted } from 'vue'
 import Searchbar from '@/components/Searchbar.vue'
 
-async function sendFriendRequest(receiverId) {
+async function sendFriendRequest(receiverId: string) {
   const userData = await supabase.auth.getUser();
-  const userId = userData.data.user.id
-  console.log(userId)
-  let currentFriends = await supabase.from('userdata').select().eq('uuid', userId);
-  const { data, error } = await supabase
-    .from('friendrequests')
-    .insert([{ senderId: userId, receiverId: receiverId }]);
-  if (error) {
-    console.error('Error sending friend request:', error.message);
+  if (userData && userData.data && userData.data.user) {
+    const userId = userData.data.user.id;
+    console.log(userId);
+    let currentFriends = await supabase.from('userdata').select().eq('uuid', userId);
+    const { data, error } = await supabase
+      .from('friendrequests')
+      .insert([{ senderId: userId, receiverId: receiverId }]);
+    if (error) {
+      console.error('Error sending friend request:', error.message);
+    }
+  } else {
+    console.error('User data is null or invalid.');
   }
 }
 </script>
