@@ -40,6 +40,7 @@ interface InventoryItem {
   imageLink: string;
   showGui?: boolean;
   showUnboxedGui?: boolean; // New property
+  
 }
 
 let userInv = ref<InventoryItem[]>([]);
