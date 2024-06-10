@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { supabase } from "@/lib/supabaseClient.js";
+import { supabase } from '@/lib/supabaseClient';
 import { boxesList } from "@/stores/boxes";
 import { onMounted, ref } from 'vue';
 

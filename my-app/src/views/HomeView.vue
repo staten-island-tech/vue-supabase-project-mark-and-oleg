@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import AuthUser from "../components/AuthUser.vue"
-import { supabase } from '@/lib/supabaseClient.js'
+import { supabase } from '@/lib/supabaseClient';
 import { ref, onMounted } from 'vue'
 import Searchbar from '@/components/Searchbar.vue'
 

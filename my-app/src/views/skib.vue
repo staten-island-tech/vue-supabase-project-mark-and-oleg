@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { supabase } from '@/lib/supabaseClient.js';
+import { supabase } from '@/lib/supabaseClient';
 import { useRoute } from 'vue-router';
 
 interface User {

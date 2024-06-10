@@ -10,7 +10,7 @@
         <ModelBox v-if="box.rarity === 'legendary'" :box="box" :rarity="box.rarity" class="leg-model" />
         <ModelBox v-if="box.rarity === 'exotic'" :box="box" :rarity="box.rarity" class="exotic-model" />
       </div>
-      <button @click="buyBox(box)">Buy Box</button>
+      <button @click="buyBox(box as Box)">Buy Box</button>
     </div>
   </div>
   <div class="mart">
@@ -27,9 +27,9 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { supabase } from '@/lib/supabaseClient.js';
+import { supabase } from '@/lib/supabaseClient';
 import ModelBox from "@/components/ModelBox.vue";
-import { boxesList } from '@/stores/boxes.ts';
+import { boxesList } from '@/stores/boxes';
 
 interface Loot {
   item: string;
@@ -47,11 +47,12 @@ interface Box {
   itemType: string;
 }
 
+
 interface MarketItem {
   id: number;
   uuid: string;
   item: string;
-  rarity: string;
+  rarity: 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary' | 'exotic'; // Ensure rarity matches the enumerated values
   sellPrice: number;
 }
 
@@ -106,9 +107,6 @@ async function buyBox(box: Box) {
     }
   }
 }
-
-
-
 </script>
 
 <style scoped>

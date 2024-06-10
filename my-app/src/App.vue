@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import UserInbox from '@/components/UserInbox.vue'
-import { supabase } from '@/lib/supabaseClient.js'
+import { supabase } from '@/lib/supabaseClient'
 import { ref, onMounted } from 'vue'
 import Searchbar from '@/components/Searchbar.vue'
 import type { User } from '@supabase/supabase-js'

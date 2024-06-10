@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { supabase } from '@/lib/supabaseClient.js'
+import { supabase } from '@/lib/supabaseClient';
 import { ref } from 'vue'
 
 const friendsList = ref<string[]>([]);
