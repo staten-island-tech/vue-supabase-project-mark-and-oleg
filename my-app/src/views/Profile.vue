@@ -16,6 +16,11 @@
         <button @click="sell(skib)">Sell to Market</button>
         <button @click="closeGui(skib)">Close GUI</button>
       </div>
+      <div v-if="skib.showUnboxedGui" class="gui">
+        <h2>You Unboxed: {{ skib.item }}</h2>
+        <p>Rarity: {{ skib.itemrarity }}</p>
+        <button @click="closeUnboxedGui(skib)">Close</button>
+      </div>
     </div>
   </div>
 </template>
@@ -34,6 +39,7 @@ interface InventoryItem {
   rarity: string;
   imageLink: string;
   showGui?: boolean;
+  showUnboxedGui?: boolean; // New property
 }
 
 let userInv = ref<InventoryItem[]>([]);
@@ -82,6 +88,7 @@ async function callUserData() {
   userInv.value = oldSigmaData[0].inventory.map((item: InventoryItem) => ({
     ...item,
     showGui: false,
+    showUnboxedGui: false, // Initialize showUnboxedGui property
   }));
 }
 
@@ -90,7 +97,11 @@ callUserData();
 async function unbox(item: InventoryItem) {
   try {
     const box = boxesList.value.find(b => b.item === item.item);
-    if (box) playVideo(videoPaths[box.rarity]);
+    if (box) {
+      playVideo(videoPaths[box.rarity]);
+      // Show the Unboxed GUI
+      item.showUnboxedGui = true;
+    }
 
     if (item.itemType === 'crate') {
       const randomIndex = Math.floor(Math.random() * item.possibleLoot.length);
@@ -104,6 +115,8 @@ async function unbox(item: InventoryItem) {
         .update({ inventory: userInv.value })
         .eq('uuid', userID.value);
     }
+ 
+
   } catch (error) {
     console.error('Error unboxing item:', (error as Error).message);
   }
@@ -136,7 +149,13 @@ function closeGui(item: InventoryItem) {
 function openGui(item: InventoryItem) {
   item.showGui = true;
 }
+
+function closeUnboxedGui(item: InventoryItem) {
+  item.showUnboxedGui = false;
+}
 </script>
+
+
 
 <style scoped>
 body {
